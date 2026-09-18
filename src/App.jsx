@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
-import centerImg from './assets/image.png'; /*[cite: 1]*/
+import centerImg from './assets/image_273466.png';[cite: 1]
 import borderOverlay from './assets/border_image.png'; 
 
 import gpayLogo from './assets/gpay.png';
@@ -13,7 +13,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const UPI_ID = 'mahantmuchandikar-1@oksbi';
+const UPI_ID = '7483430871@fam';
 const PAYEE_NAME = 'Camp Cha Samrat';
 const SUGGESTED_AMOUNTS = [101, 201, 501, 1001];
 
@@ -49,28 +49,18 @@ function App() {
     setActiveProvider(provider);
     await logTransaction(); 
 
+    // Standard universal parameters required by NPCI guidelines
     const baseParams = `pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amount)}&cu=INR&tn=${encodeURIComponent('Donation')}`;
     
-    let intentUrl = '';
-    if (provider === 'gpay') {
-      intentUrl = `gpay://upi/pay?${baseParams}`;
-    } else if (provider === 'phonepe') {
-      intentUrl = `phonepe://pay?${baseParams}`;
-    } else if (provider === 'whatsapp') {
-      intentUrl = `whatsapp://send?text=${encodeURIComponent('Payment for Camp Cha Samrat: ₹' + amount)}`; 
-      // Note: For WhatsApp Pay direct deep link, scheme varies, or fallback to UPI intent:
-      intentUrl = `upi://pay?${baseParams}&targetApp=whatsapp`;
-    } else if (provider === 'paytm') {
-      intentUrl = `paytmmp://pay?${baseParams}`;
-    } else {
-      intentUrl = `upi://pay?${baseParams}`; 
-    }
+    // Using the universal upi:// scheme lets the phone safely open its native UPI app selector,
+    // bypassing individual app security roadblocks (like PhonePe gallery/limit errors).
+    const intentUrl = `upi://pay?${baseParams}`;
     
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if (isMobile) {
       window.location.href = intentUrl; 
     } else {
-      console.log(`💻 PC Test Mode: Simulated ${provider} launch.`);
+      console.log(`💻 PC Test Mode: Simulated ${provider} universal payment launch.`);
     }
     
     setTimeout(() => { 
@@ -92,7 +82,7 @@ function App() {
       <div className="content">
         {step === 'HOME' && (
           <>
-            <img src={centerImg} alt="Center Graphic" className="floating-image" /> 
+            <img src={centerImg} alt="Center Graphic" className="floating-image" />[cite: 1]
             <button className="gold-btn" onClick={() => setStep('AMOUNT')}>
               <span className="btn-main-text">Contribute Now</span>
             </button>
@@ -132,7 +122,6 @@ function App() {
                   <button className="pay-app-btn" onClick={() => handlePaymentLaunch('phonepe')}>
                     <img src={phonepeLogo} alt="PhonePe" className="brand-logo" /> PhonePe
                   </button>
-                  {/* Clicking Other now opens a dedicated sub-menu instead of direct generic intent */}
                   <button className="pay-app-btn secondary-toggle" onClick={() => setStep('OTHER_OPTIONS')}>
                     Other Options
                   </button>
