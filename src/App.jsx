@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
 import centerImg from './assets/image.png';
-import borderOverlay from './assets/border_image.png'; 
+import borderOverlay from './assets/border_image.png';
 
 import gpayLogo from './assets/gpay.png';
 import phonepeLogo from './assets/phonepay.png';
@@ -49,18 +49,26 @@ function App() {
     setActiveProvider(provider);
     await logTransaction(); 
 
-    // Standard universal parameters required by NPCI guidelines
     const baseParams = `pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amount)}&cu=INR&tn=${encodeURIComponent('Donation')}`;
     
-    // Using the universal upi:// scheme lets the phone safely open its native UPI app selector,
-    // bypassing individual app security roadblocks (like PhonePe gallery/limit errors).
-    const intentUrl = `upi://pay?${baseParams}`;
+    // Explicit app deep links to prevent all generic handlers from routing to WhatsApp
+    let intentUrl = `upi://pay?${baseParams}`; // Default universal fallback
+
+    if (provider === 'gpay') {
+      intentUrl = `tez://upi/pay?${baseParams}`;
+    } else if (provider === 'phonepe') {
+      intentUrl = `phonepe://pay?${baseParams}`;
+    } else if (provider === 'paytm') {
+      intentUrl = `paytmmp://pay?${baseParams}`;
+    } else if (provider === 'whatsapp') {
+      intentUrl = `whatsapp://send?text=${encodeURIComponent('Pay ₹' + amount + ' to ' + UPI_ID)}`;
+    }
     
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if (isMobile) {
       window.location.href = intentUrl; 
     } else {
-      console.log(`💻 PC Test Mode: Simulated ${provider} universal payment launch.`);
+      console.log(`💻 PC Test Mode: Simulated ${provider} payment launch.`);
     }
     
     setTimeout(() => { 
@@ -82,7 +90,7 @@ function App() {
       <div className="content">
         {step === 'HOME' && (
           <>
-            <img src={centerImg} alt="Center Graphic" className="floating-image" />[cite: 1]
+            <img src={centerImg} alt="Center Graphic" className="floating-image" />
             <button className="gold-btn" onClick={() => setStep('AMOUNT')}>
               <span className="btn-main-text">Contribute Now</span>
             </button>
