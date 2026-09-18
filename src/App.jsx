@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
-import centerImg from './assets/image_273466.png'; /*[cite: 1]*/
+import centerImg from './assets/image.png'; /*[cite: 1]*/
 import borderOverlay from './assets/border_image.png'; 
 
 import gpayLogo from './assets/gpay.png';
@@ -13,7 +13,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const UPI_ID = '7483430871@fam';
+const UPI_ID = 'mahantmuchandikar-1@oksbi';
 const PAYEE_NAME = 'Camp Cha Samrat';
 const SUGGESTED_AMOUNTS = [101, 201, 501, 1001];
 
@@ -22,13 +22,13 @@ function App() {
   const [amount, setAmount] = useState('');
   const [activeProvider, setActiveProvider] = useState('');
 
- const logTransaction = async () => {
+  const logTransaction = async () => {
     try {
       const payload = { 
         amount: parseFloat(amount) || 0, 
         app_used: activeProvider,
         status: 'initiated',
-        donor_name: 'Anonymous' // Added to satisfy the database not-null constraint
+        donor_name: 'Anonymous'
       };
       const { error } = await supabase.from('transactions').insert([payload]);
       if (error) throw error;
@@ -56,6 +56,12 @@ function App() {
       intentUrl = `gpay://upi/pay?${baseParams}`;
     } else if (provider === 'phonepe') {
       intentUrl = `phonepe://pay?${baseParams}`;
+    } else if (provider === 'whatsapp') {
+      intentUrl = `whatsapp://send?text=${encodeURIComponent('Payment for Camp Cha Samrat: ₹' + amount)}`; 
+      // Note: For WhatsApp Pay direct deep link, scheme varies, or fallback to UPI intent:
+      intentUrl = `upi://pay?${baseParams}&targetApp=whatsapp`;
+    } else if (provider === 'paytm') {
+      intentUrl = `paytmmp://pay?${baseParams}`;
     } else {
       intentUrl = `upi://pay?${baseParams}`; 
     }
@@ -67,7 +73,6 @@ function App() {
       console.log(`💻 PC Test Mode: Simulated ${provider} launch.`);
     }
     
-    // Extended to 5 seconds (5000 milliseconds)
     setTimeout(() => { 
       setStep('SUCCESS'); 
     }, 5000);
@@ -127,8 +132,30 @@ function App() {
                   <button className="pay-app-btn" onClick={() => handlePaymentLaunch('phonepe')}>
                     <img src={phonepeLogo} alt="PhonePe" className="brand-logo" /> PhonePe
                   </button>
-                  <button className="pay-app-btn secondary-toggle" onClick={() => handlePaymentLaunch('other')}>
-                    Other
+                  {/* Clicking Other now opens a dedicated sub-menu instead of direct generic intent */}
+                  <button className="pay-app-btn secondary-toggle" onClick={() => setStep('OTHER_OPTIONS')}>
+                    Other Options
+                  </button>
+                </div>
+              </>
+            )}
+
+            {step === 'OTHER_OPTIONS' && (
+              <>
+                <h2 className="donation-title">Other Payment Apps</h2>
+                <p className="pay-amount-label">Amount: ₹{amount}</p>
+                <div className="apps-container">
+                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('whatsapp')}>
+                    WhatsApp Pay
+                  </button>
+                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('paytm')}>
+                    Paytm
+                  </button>
+                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('generic_upi')}>
+                    Any UPI App
+                  </button>
+                  <button className="close-modal-btn" onClick={() => setStep('OPTIONS')} style={{marginTop: '8px'}}>
+                    Back
                   </button>
                 </div>
               </>
