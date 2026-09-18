@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
-import centerImg from './assets/image_273466.png';[cite: 1]
+import centerImg from './assets/image.png';
 import borderOverlay from './assets/border_image.png'; 
 
 import gpayLogo from './assets/gpay.png';
