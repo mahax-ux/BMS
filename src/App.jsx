@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
@@ -24,7 +23,7 @@ function App() {
   const logTransaction = async () => {
     try {
       const payload = { 
-        amount: 0, // Amount is now entered in the UPI app, logged as 0 here
+        amount: 0, 
         app_used: activeProvider,
         status: 'initiated',
         donor_name: 'Anonymous'
@@ -40,26 +39,31 @@ function App() {
     setActiveProvider(provider);
     await logTransaction(); 
 
-    // Removed the &am= parameter. This bypasses the locked-amount intent errors.
-    const baseParams = `pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR&tn=${encodeURIComponent('Donation')}`;
-    
-    let intentUrl = `upi://pay?${baseParams}`;
-
-    if (provider === 'gpay') {
-      intentUrl = `tez://upi/pay?${baseParams}`;
-    } else if (provider === 'phonepe') {
-      intentUrl = `phonepe://pay?${baseParams}`;
-    } else if (provider === 'paytm') {
-      intentUrl = `paytmmp://pay?${baseParams}`;
-    } else if (provider === 'whatsapp') {
-      intentUrl = `whatsapp://send?text=${encodeURIComponent('Pay ' + PAYEE_NAME + ' via UPI: ' + UPI_ID)}`;
+    // 1. Copy the UPI ID to the user's clipboard
+    try {
+      await navigator.clipboard.writeText(UPI_ID);
+      alert(`UPI ID Copied: ${UPI_ID}\n\nPaste this in your app to send your contribution!`);
+    } catch (err) {
+      console.log("Clipboard access denied, proceeding anyway.");
     }
-    
+
+    // 2. Launch the app purely to its home screen (no payment intent parameters)
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     if (isMobile) {
-      window.location.href = intentUrl; 
+      if (provider === 'gpay') {
+        window.location.href = 'tez://';
+      } else if (provider === 'phonepe') {
+        window.location.href = 'phonepe://';
+      } else if (provider === 'paytm') {
+        window.location.href = 'paytmmp://';
+      } else if (provider === 'whatsapp') {
+        window.location.href = 'whatsapp://';
+      } else {
+        alert(`Please open your UPI app and pay to: ${UPI_ID}`);
+      }
     } else {
-      console.log(`💻 PC Test Mode: Simulated ${provider} payment launch.`);
+      console.log(`💻 PC Test Mode: Copied ${UPI_ID}`);
     }
     
     setTimeout(() => { 
