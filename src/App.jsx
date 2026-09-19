@@ -91,9 +91,21 @@ function App() {
           <div className="donation-card" style={{ maxHeight: '88vh', overflowY: 'auto' }}>
             <button className="close-btn" onClick={resetApp}>✕</button>
             
-            <h2 className="donation-title">Contribute</h2>
+            <h2 className="donation-title">
+              {/* Premium Gold Spark Vector */}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#title-grad)"/>
+                <defs>
+                  <linearGradient id="title-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#fff7c2" />
+                    <stop offset="0.5" stopColor="#ffd700" />
+                    <stop offset="1" stopColor="#d4af37" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              Contribute
+            </h2>
             
-            {/* QR Code Section */}
             <div className="qr-container">
               <img src={qrImageUrl} alt="UPI QR Code" className="qr-image" />
             </div>
@@ -102,20 +114,17 @@ function App() {
               ⬇ Download QR Code
             </button>
 
-            {/* UPI Copy Section */}
             <div className="upi-copy-wrapper">
               <div className="upi-id-display">{UPI_ID}</div>
               <button onClick={handleCopyUPI} className="upi-copy-btn">Copy</button>
             </div>
 
-            {/* Instructions / Steps */}
             <p className="payment-steps">
               1. Download QR or Copy UPI ID.<br/>
               2. Open your app using buttons below.<br/>
               3. Scan from Gallery or Paste ID.
             </p>
 
-            {/* App Launchers */}
             <div className="apps-flex">
               <button className="white-glass-btn" onClick={() => handleAppLaunch('gpay', 'tez://')}>
                 <img src={gpayLogo} alt="GPay" className="app-logo-icon" /> GPay
