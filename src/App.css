@@ -74,10 +74,6 @@ body {
 }
 
 
-/* =====================================================
-   VIDEO OVERLAY
-===================================================== */
-
 .video-overlay {
   position: fixed;
 
@@ -174,7 +170,8 @@ body {
 
 
 .content::-webkit-scrollbar-thumb {
-  background: #cba52c;
+  background:
+    #cba52c;
 }
 
 
@@ -204,7 +201,7 @@ body {
 
 
 /* =====================================================
-   LANDING PAGE
+   LANDING
 ===================================================== */
 
 .hero-section {
@@ -221,271 +218,22 @@ body {
 
 
 /* =====================================================
-   NAV
-===================================================== */
-
-.landing-nav {
-  position: absolute;
-
-  top: 12px;
-
-  left: 22px;
-  right: 22px;
-
-  height: 42px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  padding:
-    0 6px
-    0 12px;
-
-  z-index: 80;
-
-  border:
-    1px solid
-    rgba(255,215,0,0.24);
-
-  border-radius: 9px;
-
-  background:
-    rgba(5,4,3,0.24);
-
-  backdrop-filter:
-    blur(8px);
-
-  -webkit-backdrop-filter:
-    blur(8px);
-}
-
-
-/* =====================================================
-   LOGO
-===================================================== */
-
-.landing-logo {
-  display: flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  border: 0;
-
-  background: transparent;
-
-  color:
-    rgba(255,239,166,0.9);
-
-  font-family:
-    'Oswald',
-    sans-serif;
-
-  font-size:
-    0.58rem;
-
-  letter-spacing:
-    1.5px;
-
-  cursor:
-    pointer;
-}
-
-
-.landing-logo-dot {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-
-  background:
-    #ffd700;
-
-  box-shadow:
-    0 0 10px
-    #ffd700;
-}
-
-
-/* =====================================================
-   MENU
-===================================================== */
-
-.landing-menu {
-  width: 31px;
-  height: 31px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 3px;
-
-  border:
-    1px solid
-    rgba(255,215,0,0.3);
-
-  border-radius: 50%;
-
-  background:
-    rgba(0,0,0,0.2);
-
-  cursor:
-    pointer;
-}
-
-
-.landing-menu span {
-  width: 12px;
-  height: 1px;
-
-  background:
-    #ffd700;
-}
-
-
-.landing-menu-panel {
-  position: absolute;
-
-  top: 48px;
-
-  right: 0;
-
-  width: 150px;
-
-  padding: 8px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 2px;
-
-  border:
-    1px solid
-    rgba(255,215,0,0.22);
-
-  border-radius: 12px;
-
-  background:
-    rgba(8,6,4,0.95);
-
-  backdrop-filter:
-    blur(15px);
-
-  box-shadow:
-    0 15px 40px
-    rgba(0,0,0,0.6);
-
-  animation:
-    menuAppear 0.2s ease;
-}
-
-
-@keyframes menuAppear {
-
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(-5px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-
-}
-
-
-.landing-menu-panel button {
-  width: 100%;
-
-  padding: 10px;
-
-  border: 0;
-
-  border-radius: 7px;
-
-  background: transparent;
-
-  color:
-    rgba(255,255,255,0.72);
-
-  font-family:
-    'Oswald',
-    sans-serif;
-
-  font-size:
-    0.58rem;
-
-  letter-spacing:
-    1.5px;
-
-  cursor:
-    pointer;
-
-  text-align:
-    left;
-}
-
-
-.landing-menu-panel button:hover {
-  color:
-    #ffd700;
-
-  background:
-    rgba(255,215,0,0.06);
-}
-
-
-.landing-menu-panel .menu-contribute {
-  margin-top: 3px;
-
-  color:
-    #080604;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff3a8,
-      #ffd700,
-      #b88821
-    );
-
-  font-weight:
-    700;
-}
-
-
-/* =====================================================
-   WEBSITE BY + SHLOKA
+   TOP CREDITS
 ===================================================== */
 
 .landing-top-info {
   position: absolute;
 
-  top: 70px;
+  top: 35px;
 
-  left: 24px;
-  right: 24px;
+  left: 20px;
+  right: 20px;
 
   display: flex;
 
-  justify-content: space-between;
-
   align-items: flex-start;
+
+  justify-content: space-between;
 
   z-index: 30;
 
@@ -493,28 +241,34 @@ body {
 }
 
 
+/* =====================================================
+   WEBSITE BY
+===================================================== */
+
 .creator-tag {
   display: flex;
 
   flex-direction: column;
 
-  gap: 3px;
+  align-items: flex-start;
+
+  gap: 4px;
 
   text-shadow:
     0 2px 8px
-    rgba(0,0,0,0.9);
+    rgba(0,0,0,0.95);
 }
 
 
 .creator-tag span {
   color:
-    rgba(255,255,255,0.48);
+    rgba(255,255,255,0.58);
 
   font-size:
-    0.43rem;
+    0.48rem;
 
   letter-spacing:
-    1.5px;
+    2px;
 }
 
 
@@ -523,16 +277,23 @@ body {
     #fff0a0;
 
   font-size:
-    0.52rem;
+    0.60rem;
 
   font-weight:
-    500;
+    600;
+
+  letter-spacing:
+    0.2px;
 }
 
 
+/* =====================================================
+   SHLOKA
+===================================================== */
+
 .shloka-tag {
-  max-width:
-    155px;
+  width:
+    190px;
 
   color:
     #ffe99b;
@@ -542,17 +303,20 @@ body {
     serif;
 
   font-size:
-    0.43rem;
+    0.62rem;
+
+  font-weight:
+    500;
 
   line-height:
-    1.7;
+    1.8;
 
   text-align:
     right;
 
   text-shadow:
-    0 2px 9px
-    rgba(0,0,0,0.95);
+    0 2px 10px
+    rgba(0,0,0,1);
 }
 
 
@@ -595,8 +359,7 @@ body {
   max-width: 360px;
   max-height: 360px;
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
   background:
     radial-gradient(
@@ -690,14 +453,11 @@ body {
 ===================================================== */
 
 .landing-contribute {
-  position:
-    absolute;
+  position: absolute;
 
-  left:
-    50%;
+  left: 50%;
 
-  top:
-    80%;
+  top: 80%;
 
   transform:
     translateX(-50%);
@@ -708,21 +468,8 @@ body {
   height:
     43px;
 
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  gap:
-    18px;
-
   padding:
-    0 10px
-    0 18px;
+    0 25px;
 
   border:
     1px solid
@@ -734,8 +481,8 @@ body {
   background:
     linear-gradient(
       135deg,
-      rgba(255,215,0,0.17),
-      rgba(255,255,255,0.045)
+      rgba(255,215,0,0.18),
+      rgba(255,255,255,0.05)
     );
 
   backdrop-filter:
@@ -754,6 +501,15 @@ body {
   font-family:
     'Oswald',
     sans-serif;
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    1.7px;
 
   cursor:
     pointer;
@@ -775,51 +531,9 @@ body {
   background:
     linear-gradient(
       135deg,
-      rgba(255,215,0,0.25),
+      rgba(255,215,0,0.27),
       rgba(255,255,255,0.07)
     );
-}
-
-
-.landing-contribute span {
-  font-size:
-    0.68rem;
-
-  font-weight:
-    600;
-
-  letter-spacing:
-    1.7px;
-}
-
-
-.landing-contribute b {
-  width:
-    25px;
-
-  height:
-    25px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  border-radius:
-    50%;
-
-  background:
-    #ffd700;
-
-  color:
-    #050403;
-
-  font-size:
-    0.9rem;
 }
 
 
@@ -1468,16 +1182,7 @@ body {
     15px;
 
   padding:
-    13px 18px;
-
-  display:
-    flex;
-
-  align-items:
-    center;
-
-  gap:
-    20px;
+    13px 22px;
 
   border:
     0;
@@ -1510,14 +1215,8 @@ body {
 }
 
 
-.final-cta button b {
-  font-size:
-    1rem;
-}
-
-
 /* =====================================================
-   CONTACT
+   SMALLER GET IN TOUCH
 ===================================================== */
 
 .contact-section {
@@ -1525,13 +1224,13 @@ body {
     relative;
 
   padding:
-    100px 25px;
+    55px 24px 50px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(5,4,3,0.22),
-      rgba(5,4,3,0.42)
+      rgba(5,4,3,0.20),
+      rgba(5,4,3,0.38)
     );
 }
 
@@ -1541,22 +1240,22 @@ body {
     #d4af37;
 
   font-size:
-    0.5rem;
+    0.42rem;
 
   letter-spacing:
-    3px;
+    2.5px;
 }
 
 
 .contact-section h2 {
   margin:
-    15px 0 45px;
+    9px 0 25px;
 
   font-family:
     'Caacupe One';
 
   font-size:
-    2rem;
+    1.45rem;
 
   line-height:
     0.9;
@@ -1565,10 +1264,25 @@ body {
 
 .contact-section h2 strong {
   display:
-    block;
+    inline;
+
+  margin-left:
+    5px;
 
   color:
     #ffd700;
+}
+
+
+.contact-details {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    15px;
 }
 
 
@@ -1580,19 +1294,13 @@ body {
     column;
 
   gap:
-    6px;
-
-  margin-bottom:
-    25px;
+    3px;
 
   color:
-    rgba(255,255,255,0.8);
+    rgba(255,255,255,0.72);
 
   text-decoration:
     none;
-
-  font-size:
-    0.8rem;
 }
 
 
@@ -1601,10 +1309,10 @@ body {
     rgba(255,215,0,0.55);
 
   font-size:
-    0.45rem;
+    0.38rem;
 
   letter-spacing:
-    2px;
+    1.7px;
 }
 
 
@@ -1616,7 +1324,10 @@ body {
     center;
 
   gap:
-    7px;
+    6px;
+
+  font-size:
+    0.62rem;
 
   font-weight:
     400;
@@ -1625,10 +1336,10 @@ body {
 
 .contact-section img {
   width:
-    16px;
+    13px;
 
   height:
-    16px;
+    13px;
 }
 
 
@@ -1641,7 +1352,7 @@ footer {
     relative;
 
   padding:
-    25px 20px 45px;
+    22px 20px 42px;
 
   display:
     flex;
@@ -1653,19 +1364,19 @@ footer {
     center;
 
   gap:
-    8px;
+    7px;
 
   background:
-    rgba(5,4,3,0.40);
+    rgba(5,4,3,0.35);
 
   color:
     rgba(255,255,255,0.25);
 
   font-size:
-    0.45rem;
+    0.40rem;
 
   letter-spacing:
-    1.5px;
+    1.4px;
 }
 
 
@@ -1693,7 +1404,7 @@ footer {
     center;
 
   padding:
-    20px;
+    18px;
 
   background:
     rgba(0,0,0,0.78);
@@ -1740,32 +1451,6 @@ footer {
   box-shadow:
     0 30px 80px
     rgba(0,0,0,0.9);
-
-  animation:
-    modalIn 0.25s ease;
-}
-
-
-@keyframes modalIn {
-
-  from {
-    opacity:
-      0;
-
-    transform:
-      scale(0.94)
-      translateY(15px);
-  }
-
-  to {
-    opacity:
-      1;
-
-    transform:
-      scale(1)
-      translateY(0);
-  }
-
 }
 
 
@@ -1860,12 +1545,6 @@ footer {
 }
 
 
-.modal-content p {
-  margin-bottom:
-    13px;
-}
-
-
 /* =====================================================
    PAYMENT MODAL
 ===================================================== */
@@ -1878,13 +1557,13 @@ footer {
     min(350px,92vw);
 
   max-height:
-    90vh;
+    92vh;
 
   overflow-y:
     auto;
 
   padding:
-    34px 22px 25px;
+    32px 20px 22px;
 
   border:
     1px solid
@@ -1906,9 +1585,6 @@ footer {
 
   text-align:
     center;
-
-  animation:
-    modalIn 0.25s ease;
 }
 
 
@@ -1921,7 +1597,7 @@ footer {
     block;
 
   margin-bottom:
-    8px;
+    7px;
 
   color:
     rgba(255,215,0,0.85);
@@ -1972,14 +1648,10 @@ footer {
 
 .payment-subtitle {
   margin:
-    13px 0 20px;
+    12px 0 17px;
 
   color:
-    rgba(255,255,255,0.65);
-
-  font-family:
-    'Oswald',
-    sans-serif;
+    rgba(255,255,255,0.67);
 
   font-size:
     0.68rem;
@@ -1990,13 +1662,18 @@ footer {
 
 
 /* =====================================================
-   QR + DOWNLOAD
-   ONE STRAIGHT LINE
+   QR AREA
 ===================================================== */
 
-.qr-payment-row {
+.qr-payment-area {
+  width:
+    100%;
+
   display:
     flex;
+
+  flex-direction:
+    column;
 
   align-items:
     center;
@@ -2004,21 +1681,12 @@ footer {
   justify-content:
     center;
 
-  gap:
-    10px;
-
-  width:
-    100%;
-
   margin:
     0 auto 14px;
 }
 
 
 .qr-container {
-  flex-shrink:
-    0;
-
   display:
     flex;
 
@@ -2029,7 +1697,7 @@ footer {
     center;
 
   padding:
-    6px;
+    7px;
 
   background:
     #ffffff;
@@ -2047,10 +1715,10 @@ footer {
     block;
 
   width:
-    135px;
+    155px;
 
   height:
-    135px;
+    155px;
 }
 
 
@@ -2059,15 +1727,18 @@ footer {
 ===================================================== */
 
 .download-btn {
-  flex-shrink:
-    0;
+  margin-top:
+    8px;
 
   padding:
-    9px 10px;
+    8px 13px;
 
   border:
     1px solid
-    rgba(255,215,0,0.30);
+    rgba(255,215,0,0.38);
+
+  border-radius:
+    3px;
 
   background:
     rgba(255,215,0,0.10);
@@ -2086,17 +1757,13 @@ footer {
     600;
 
   letter-spacing:
-    0.7px;
+    0.8px;
 
   white-space:
     nowrap;
 
   cursor:
     pointer;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
 }
 
 
@@ -2110,7 +1777,7 @@ footer {
 
 
 /* =====================================================
-   UPI ROW
+   UPI
 ===================================================== */
 
 .upi-row {
@@ -2123,14 +1790,11 @@ footer {
   align-items:
     stretch;
 
-  justify-content:
-    center;
-
   gap:
     5px;
 
   margin:
-    4px auto 18px;
+    3px auto 16px;
 
   overflow:
     hidden;
@@ -2145,7 +1809,7 @@ footer {
     0;
 
   padding:
-    10px 8px;
+    9px 7px;
 
   border:
     1px solid
@@ -2155,13 +1819,13 @@ footer {
     rgba(0,0,0,0.45);
 
   color:
-    rgba(255,255,255,0.80);
+    rgba(255,255,255,0.82);
 
   font-family:
     monospace;
 
   font-size:
-    0.60rem;
+    0.59rem;
 
   white-space:
     nowrap;
@@ -2212,16 +1876,13 @@ footer {
   font-weight:
     700;
 
-  letter-spacing:
-    0.5px;
-
   cursor:
     pointer;
 }
 
 
 /* =====================================================
-   PAYMENT INSTRUCTIONS
+   STEPS
 ===================================================== */
 
 .steps {
@@ -2229,10 +1890,10 @@ footer {
     100%;
 
   margin:
-    0 auto 17px;
+    0 auto 15px;
 
   padding:
-    9px 12px;
+    7px 9px;
 
   border-left:
     1px solid
@@ -2241,36 +1902,52 @@ footer {
   background:
     rgba(255,215,0,0.035);
 
-  color:
-    rgba(255,255,255,0.68);
-
   text-align:
     left;
+}
 
-  font-family:
-    'Oswald',
-    sans-serif;
+
+.steps div {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  min-height:
+    21px;
+}
+
+
+.steps b {
+  width:
+    20px;
+
+  flex-shrink:
+    0;
+
+  color:
+    #ffd700;
 
   font-size:
-    0.65rem;
-
-  line-height:
-    1.9;
-
-  letter-spacing:
-    0.2px;
+    0.58rem;
 }
 
 
 .steps span {
-  white-space:
-    nowrap;
+  color:
+    rgba(255,255,255,0.70);
+
+  font-size:
+    0.61rem;
 }
 
 
 /* =====================================================
    PAYMENT APPS
-   ONE STRAIGHT LINE
 ===================================================== */
 
 .payment-apps {
@@ -2283,23 +1960,17 @@ footer {
   align-items:
     center;
 
-  justify-content:
-    center;
-
   gap:
     8px;
 
   margin:
-    0 auto 17px;
+    0 auto 15px;
 }
 
 
 .payment-apps button {
   flex:
     1;
-
-  min-width:
-    0;
 
   height:
     38px;
@@ -2338,19 +2009,6 @@ footer {
 
   cursor:
     pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
-}
-
-
-.payment-apps button:hover {
-  background:
-    rgba(255,215,0,0.08);
-
-  border-color:
-    rgba(255,215,0,0.3);
 }
 
 
@@ -2375,10 +2033,7 @@ footer {
     100%;
 
   height:
-    44px;
-
-  padding:
-    0 12px;
+    43px;
 
   border:
     0;
@@ -2409,25 +2064,11 @@ footer {
 
   cursor:
     pointer;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-
-.paid-btn:hover {
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 8px 20px
-    rgba(255,215,0,0.18);
 }
 
 
 /* =====================================================
-   PAYMENT CLOSE BUTTON
+   PAYMENT CLOSE
 ===================================================== */
 
 .payment-modal .close-btn {
@@ -2438,10 +2079,10 @@ footer {
     24px;
 
   top:
-    12px;
+    11px;
 
   right:
-    12px;
+    11px;
 
   border:
     1px solid
@@ -2452,9 +2093,6 @@ footer {
 
   font-size:
     0.9rem;
-
-  background:
-    rgba(0,0,0,0.25);
 }
 
 
@@ -2609,50 +2247,44 @@ footer {
 
 
 /* =====================================================
-   MOBILE — SMALL PHONES
+   SMALL MOBILE
 ===================================================== */
 
 @media (max-width: 380px) {
 
-  .landing-nav {
-    left:
-      18px;
-
-    right:
-      18px;
-  }
-
-
   .landing-top-info {
     top:
-      67px;
+      28px;
 
     left:
-      19px;
+      15px;
 
     right:
-      19px;
+      15px;
   }
 
 
   .creator-tag span {
     font-size:
-      0.39rem;
+      0.40rem;
   }
 
 
   .creator-tag strong {
     font-size:
-      0.47rem;
+      0.51rem;
   }
 
 
   .shloka-tag {
-    max-width:
-      135px;
+    width:
+      165px;
 
     font-size:
-      0.39rem;
+      0.53rem;
+
+    line-height:
+      1.7;
   }
 
 
@@ -2679,16 +2311,13 @@ footer {
       80%;
 
     min-width:
-      160px;
+      155px;
 
     height:
-      40px;
-  }
+      39px;
 
-
-  .landing-contribute span {
     font-size:
-      0.62rem;
+      0.61rem;
   }
 
 
@@ -2705,94 +2334,78 @@ footer {
       94vw;
 
     padding:
-      30px 17px 20px;
-  }
-
-
-  .payment-label {
-    font-size:
-      0.55rem;
+      29px 16px 19px;
   }
 
 
   .payment-modal h2 {
     font-size:
-      1.8rem;
+      1.75rem;
   }
 
 
   .payment-subtitle {
     font-size:
-      0.63rem;
-
-    margin-bottom:
-      16px;
-  }
-
-
-  .qr-payment-row {
-    gap:
-      7px;
-  }
-
-
-  .qr-container {
-    padding:
-      5px;
+      0.61rem;
   }
 
 
   .qr-container img {
     width:
-      122px;
+      142px;
 
     height:
-      122px;
+      142px;
   }
 
 
   .download-btn {
     font-size:
       0.50rem;
-
-    padding:
-      8px 7px;
   }
 
 
   .upi-row span {
     font-size:
-      0.53rem;
-
-    padding:
-      9px 5px;
+      0.52rem;
   }
 
 
-  .upi-row button {
-    min-width:
-      44px;
-
+  .steps span {
     font-size:
-      0.50rem;
-  }
-
-
-  .steps {
-    font-size:
-      0.59rem;
-
-    padding:
-      8px 9px;
+      0.57rem;
   }
 
 
   .payment-apps button {
     height:
-      36px;
+      35px;
 
     font-size:
-      0.58rem;
+      0.56rem;
+  }
+
+
+  /* CONTACT */
+
+  .contact-section {
+    padding:
+      45px 20px 40px;
+  }
+
+
+  .contact-section h2 {
+    font-size:
+      1.25rem;
+
+    margin:
+      7px 0 20px;
+  }
+
+
+  .contact-details {
+    gap:
+      11px;
   }
 
 }

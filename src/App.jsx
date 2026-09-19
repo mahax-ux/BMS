@@ -47,9 +47,6 @@ function App() {
   const [activeInfoModal, setActiveInfoModal] =
     useState(null);
 
-  const [menuOpen, setMenuOpen] =
-    useState(false);
-
   const [copied, setCopied] =
     useState(false);
 
@@ -64,13 +61,13 @@ function App() {
     )}&cu=INR`;
 
   const qrImageUrl =
-    `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(
+    `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${encodeURIComponent(
       upiString
     )}`;
 
 
   // ===================================================
-  // DATABASE
+  // TRANSACTION
   // ===================================================
 
   const logTransaction = async (method) => {
@@ -203,8 +200,6 @@ function App() {
 
     setActiveInfoModal(null);
 
-    setMenuOpen(false);
-
   };
 
 
@@ -213,8 +208,6 @@ function App() {
   // ===================================================
 
   const scrollToSection = (id) => {
-
-    setMenuOpen(false);
 
     const element =
       document.getElementById(id);
@@ -323,15 +316,11 @@ function App() {
 
 
       {/* =================================================
-          SCROLLABLE CONTENT
+          CONTENT
       ================================================= */}
 
       <div className="content">
 
-
-        {/* =================================================
-            HOME
-        ================================================= */}
 
         {step === 'HOME' && (
 
@@ -349,103 +338,12 @@ function App() {
 
 
               {/* =================================================
-                  NAVIGATION
-              ================================================= */}
-
-              <nav className="landing-nav">
-
-                <button
-                  className="landing-logo"
-                  onClick={() =>
-                    scrollToSection('home')
-                  }
-                >
-
-                  <span className="landing-logo-dot" />
-
-                  <span>
-                    CCS
-                  </span>
-
-                </button>
-
-
-                <button
-                  className="landing-menu"
-                  onClick={() =>
-                    setMenuOpen(!menuOpen)
-                  }
-                  aria-label="Menu"
-                >
-
-                  <span />
-                  <span />
-                  <span />
-
-                </button>
-
-
-                {menuOpen && (
-
-                  <div className="landing-menu-panel">
-
-                    <button
-                      onClick={() =>
-                        scrollToSection('home')
-                      }
-                    >
-                      HOME
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        scrollToSection('legacy')
-                      }
-                    >
-                      LEGACY
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        scrollToSection('events')
-                      }
-                    >
-                      EVENTS
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        scrollToSection('contact')
-                      }
-                    >
-                      CONTACT
-                    </button>
-
-                    <button
-                      className="menu-contribute"
-                      onClick={() => {
-
-                        setMenuOpen(false);
-
-                        setStep('PAY_MANUAL');
-
-                      }}
-                    >
-                      CONTRIBUTE
-                    </button>
-
-                  </div>
-
-                )}
-
-              </nav>
-
-
-              {/* =================================================
-                  WEBSITE BY + SHLOKA
+                  TOP CREDITS
               ================================================= */}
 
               <div className="landing-top-info">
+
+                {/* LEFT */}
 
                 <div className="creator-tag">
 
@@ -459,6 +357,8 @@ function App() {
 
                 </div>
 
+
+                {/* RIGHT */}
 
                 <div className="shloka-tag">
 
@@ -474,7 +374,7 @@ function App() {
 
 
               {/* =================================================
-                  SINGLE CENTER ARTWORK
+                  CENTER ARTWORK
               ================================================= */}
 
               <div className="landing-artwork">
@@ -501,13 +401,7 @@ function App() {
                 }
               >
 
-                <span>
-                  CONTRIBUTE NOW
-                </span>
-
-                <b>
-                  ↗
-                </b>
+                CONTRIBUTE NOW
 
               </button>
 
@@ -535,7 +429,7 @@ function App() {
 
 
             {/* =================================================
-                LEGACY / TIMELINE
+                LEGACY
             ================================================= */}
 
             <section
@@ -650,9 +544,7 @@ function App() {
 
                 <div className="event-row">
 
-                  <span>
-                    01
-                  </span>
+                  <span>01</span>
 
                   <div>
 
@@ -675,9 +567,7 @@ function App() {
 
                 <div className="event-row">
 
-                  <span>
-                    02
-                  </span>
+                  <span>02</span>
 
                   <div>
 
@@ -700,9 +590,7 @@ function App() {
 
                 <div className="event-row">
 
-                  <span>
-                    03
-                  </span>
+                  <span>03</span>
 
                   <div>
 
@@ -725,9 +613,7 @@ function App() {
 
                 <div className="event-row">
 
-                  <span>
-                    04
-                  </span>
+                  <span>04</span>
 
                   <div>
 
@@ -750,9 +636,7 @@ function App() {
 
                 <div className="event-row">
 
-                  <span>
-                    05
-                  </span>
+                  <span>05</span>
 
                   <div>
 
@@ -810,10 +694,6 @@ function App() {
 
                 CONTRIBUTE TO BAPPA
 
-                <b>
-                  ↗
-                </b>
-
               </button>
 
             </section>
@@ -843,41 +723,45 @@ function App() {
               </h2>
 
 
-              <a href="tel:9538764241">
+              <div className="contact-details">
 
-                <small>
-                  PHONE
-                </small>
+                <a href="tel:9538764241">
 
-                <strong>
-                  9538764241
-                </strong>
+                  <small>
+                    PHONE
+                  </small>
 
-              </a>
+                  <strong>
+                    9538764241
+                  </strong>
+
+                </a>
 
 
-              <a
-                href="https://instagram.com/bms_camp_boys"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+                <a
+                  href="https://instagram.com/bms_camp_boys"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
 
-                <small>
-                  INSTAGRAM
-                </small>
+                  <small>
+                    INSTAGRAM
+                  </small>
 
-                <strong>
+                  <strong>
 
-                  <img
-                    src={instaLogo}
-                    alt="Instagram"
-                  />
+                    <img
+                      src={instaLogo}
+                      alt="Instagram"
+                    />
 
-                  @bms_camp_boys
+                    @bms_camp_boys
 
-                </strong>
+                  </strong>
 
-              </a>
+                </a>
+
+              </div>
 
             </section>
 
@@ -973,7 +857,7 @@ function App() {
 
 
         {/* =================================================
-            PAYMENT MODAL
+            PAYMENT
         ================================================= */}
 
         {step === 'PAY_MANUAL' && (
@@ -983,8 +867,6 @@ function App() {
             <div className="payment-modal">
 
 
-              {/* CLOSE */}
-
               <button
                 className="close-btn"
                 onClick={resetApp}
@@ -992,8 +874,6 @@ function App() {
                 ×
               </button>
 
-
-              {/* HEADER */}
 
               <span className="payment-label">
                 SUPPORT THE MANDAL
@@ -1011,11 +891,10 @@ function App() {
 
 
               {/* =================================================
-                  QR + DOWNLOAD — ONE ROW
+                  QR
               ================================================= */}
 
-              <div className="qr-payment-row">
-
+              <div className="qr-payment-area">
 
                 <div
                   className="qr-container"
@@ -1032,6 +911,8 @@ function App() {
                 </div>
 
 
+                {/* DOWNLOAD BELOW QR */}
+
                 <button
                   className="download-btn"
                   onClick={handleDownloadQR}
@@ -1039,12 +920,11 @@ function App() {
                   ↓ DOWNLOAD QR
                 </button>
 
-
               </div>
 
 
               {/* =================================================
-                  UPI ID + COPY — ONE ROW
+                  UPI
               ================================================= */}
 
               <div className="upi-row">
@@ -1066,29 +946,34 @@ function App() {
                   STEPS
               ================================================= */}
 
-              <p className="steps">
+              <div className="steps">
 
-                <span>
-                  01 — Open your payment app
-                </span>
+                <div>
+                  <b>01</b>
+                  <span>
+                    Open your payment app
+                  </span>
+                </div>
 
-                <br />
+                <div>
+                  <b>02</b>
+                  <span>
+                    Scan QR or enter UPI ID
+                  </span>
+                </div>
 
-                <span>
-                  02 — Scan QR or enter UPI ID
-                </span>
+                <div>
+                  <b>03</b>
+                  <span>
+                    Complete your contribution
+                  </span>
+                </div>
 
-                <br />
-
-                <span>
-                  03 — Complete your contribution
-                </span>
-
-              </p>
+              </div>
 
 
               {/* =================================================
-                  PAYMENT APPS — ONE ROW
+                  PAYMENT APPS
               ================================================= */}
 
               <div className="payment-apps">
@@ -1107,9 +992,7 @@ function App() {
                     alt="GPay"
                   />
 
-                  <span>
-                    GPay
-                  </span>
+                  GPay
 
                 </button>
 
@@ -1128,18 +1011,12 @@ function App() {
                     alt="PhonePe"
                   />
 
-                  <span>
-                    PhonePe
-                  </span>
+                  PhonePe
 
                 </button>
 
               </div>
 
-
-              {/* =================================================
-                  PAID
-              ================================================= */}
 
               <button
                 className="paid-btn"
@@ -1147,7 +1024,9 @@ function App() {
                   setStep('SUCCESS')
                 }
               >
+
                 I HAVE PAID →
+
               </button>
 
 
@@ -1172,16 +1051,13 @@ function App() {
                 ॐ
               </div>
 
-
               <span className="payment-label">
                 CONTRIBUTION RECEIVED
               </span>
 
-
               <h2>
                 THANK YOU
               </h2>
-
 
               <p>
                 Please show your
@@ -1189,7 +1065,6 @@ function App() {
                 to the mandal Karyakarta
                 and collect your Paavthi.
               </p>
-
 
               <button
                 className="paid-btn"
@@ -1206,7 +1081,7 @@ function App() {
 
 
         {/* =================================================
-            QR FULLSCREEN
+            FULLSCREEN QR
         ================================================= */}
 
         {isQrMaximized && (
@@ -1233,12 +1108,10 @@ function App() {
                 ×
               </button>
 
-
               <img
                 src={qrImageUrl}
                 alt="UPI QR Code"
               />
-
 
               <span>
                 SCAN & PAY
@@ -1266,6 +1139,7 @@ function App() {
     </div>
 
   );
+
 }
 
 export default App;
