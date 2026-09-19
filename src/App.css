@@ -69,15 +69,50 @@ html, body {
 }
 
 /* =========================================
-   3. HERO SECTION (LOGO, BUTTON, SCROLL)
+   3. HERO SECTION (HEADERS, LOGO, BUTTON)
    ========================================= */
 .hero-section {
   position: relative;
   width: 100%;
-  height: 100dvh; 
+  height: 100vh; /* Locked to exactly window height to prevent jumping */
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.top-header {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top));
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 20;
+  pointer-events: none; /* Allows clicking through the empty space */
+}
+
+.creator-tag {
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: auto;
+  text-align: left;
+  max-width: 45%;
+}
+
+.shloka-tag {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: right;
+  max-width: 50%;
+  pointer-events: auto;
+  
+  background: linear-gradient(135deg, #fff7c2 0%, #ffd700 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
 }
 
 .floating-image {
@@ -181,7 +216,7 @@ html, body {
    ========================================= */
 .timeline-section {
   width: 100%;
-  padding: 40px 20px 80px 20px; /* Reduced bottom padding */
+  padding: 40px 20px 80px 20px; 
 }
 
 .timeline-container {
@@ -197,7 +232,6 @@ html, body {
   bottom: 0;
   left: 50%;
   width: 3px;
-  /* Reverted back to the full golden gradient */
   background: linear-gradient(180deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
   transform: translateX(-50%);
   z-index: 1;
@@ -312,15 +346,17 @@ html, body {
 }
 
 /* =========================================
-   5. CONTACT US SECTION
+   5. COMPACT INLINE CONTACT US SECTION
    ========================================= */
 .contact-section {
   width: 100%;
-  padding: 0 20px 100px 20px;
+  padding: 10px 20px 80px 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap; /* Allows wrapping on very tiny screens */
+  gap: 12px;
   position: relative;
   z-index: 10;
 }
@@ -328,61 +364,43 @@ html, body {
 .contact-title {
   font-family: 'Caacupe One', 'Oswald', sans-serif;
   color: #ffd700;
-  font-size: 1.8rem;
-  letter-spacing: 2px;
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-  margin-bottom: 8px;
+  margin: 0;
 }
 
-.contact-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  max-width: 320px;
-}
-
-.contact-btn {
+.contact-links-inline {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
-  padding: 14px 20px;
+}
+
+.inline-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.9rem;
   text-decoration: none;
-  
-  color: #ffffff;
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  
-  border: 1px solid rgba(218, 165, 32, 0.4);
-  border-radius: 14px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: color 0.2s ease;
 }
 
-.contact-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+.inline-contact-item:hover {
+  color: #ffd700;
 }
 
-.contact-btn:active {
-  transform: scale(0.98);
+.contact-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
-.insta-btn {
-  background: linear-gradient(45deg, rgba(240, 148, 51, 0.2), rgba(230, 104, 60, 0.2), rgba(220, 39, 67, 0.2), rgba(204, 35, 102, 0.2), rgba(188, 24, 136, 0.2));
-  border: 1px solid rgba(220, 39, 67, 0.5);
-}
-
-.insta-btn:hover {
-  background: linear-gradient(45deg, rgba(240, 148, 51, 0.3), rgba(230, 104, 60, 0.3), rgba(220, 39, 67, 0.3), rgba(204, 35, 102, 0.3), rgba(188, 24, 136, 0.3));
+.contact-divider {
+  color: rgba(218, 165, 32, 0.5);
+  font-size: 0.9rem;
 }
 
 /* =========================================

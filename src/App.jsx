@@ -6,6 +6,7 @@ import borderOverlay from './assets/border_image.png';
 
 import gpayLogo from './assets/gpay.png';
 import phonepeLogo from './assets/phonepay.png';
+import instaLogo from './assets/insta.png'; // Make sure this PNG is in your assets folder
 
 import './App.css';
 
@@ -113,7 +114,17 @@ function App() {
           <div className="scrollable-page">
             
             <section className="hero-section">
+              {/* Header Tags */}
+              <div className="top-header">
+                <span className="creator-tag">website by Mahant - 7483430871</span>
+                <span className="shloka-tag">
+                  वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br/>
+                  निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+                </span>
+              </div>
+
               <img src={centerImg} alt="Center Graphic" className="floating-image" /> 
+              
               <button className="gold-btn" onClick={() => setStep('PAY_MANUAL')}>
                 <span className="btn-main-text">Contribute Now</span>
               </button>
@@ -144,15 +155,17 @@ function App() {
               </div>
             </section>
 
-            {/* Contact Us Section */}
+            {/* Single Line Contact Us Section */}
             <section className="contact-section">
-              <h2 className="contact-title">Contact Us</h2>
-              <div className="contact-buttons">
-                <a href="tel:9538764241" className="contact-btn">
+              <h2 className="contact-title">Contact Us :</h2>
+              <div className="contact-links-inline">
+                <a href="tel:9538764241" className="inline-contact-item">
                   📞 9538764241
                 </a>
-                <a href="https://instagram.com/bms_cha_raja" target="_blank" rel="noopener noreferrer" className="contact-btn insta-btn">
-                  📸 @bms_cha_raja
+                <span className="contact-divider">|</span>
+                <a href="https://instagram.com/bms_cha_raja" target="_blank" rel="noopener noreferrer" className="inline-contact-item">
+                  <img src={instaLogo} alt="Instagram" className="contact-icon" /> 
+                  @bms_cha_raja
                 </a>
               </div>
             </section>
@@ -160,6 +173,7 @@ function App() {
           </div>
         )}
 
+        {/* Info Modals */}
         {activeInfoModal && (
           <div className="modal-overlay" onClick={() => setActiveInfoModal(null)}>
             <div className="donation-card info-modal" onClick={(e) => e.stopPropagation()}>
@@ -178,6 +192,7 @@ function App() {
           </div>
         )}
 
+        {/* Payment Modal */}
         {step === 'PAY_MANUAL' && (
           <div className="modal-overlay">
             <div className="donation-card" style={{ maxHeight: '88vh', overflowY: 'auto' }}>
