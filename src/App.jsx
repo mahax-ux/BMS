@@ -19,6 +19,7 @@ const PAYEE_NAME = 'Camp Cha Samrat';
 function App() {
   const [step, setStep] = useState('HOME'); 
   const [isQrMaximized, setIsQrMaximized] = useState(false);
+  const [activeInfoModal, setActiveInfoModal] = useState(null); 
 
   const logTransaction = async (method) => {
     try {
@@ -71,59 +72,101 @@ function App() {
   const resetApp = () => {
     setStep('HOME');
     setIsQrMaximized(false);
+    setActiveInfoModal(null);
   };
 
-  // Content for the 4 timeline glass boxes
-  const navLinks = [
-    { id: 1, title: 'Our History', desc: 'Read about the legacy of Camp Cha Samrat.', link: '#' },
-    { id: 2, title: 'Gallery', desc: 'Explore photos and videos from previous years.', link: '#' },
-    { id: 3, title: 'Events Schedule', desc: 'Check out the upcoming aarti and cultural timings.', link: '#' },
-    { id: 4, title: 'Mandal Members', desc: 'Meet the dedicated karyakartas behind the festival.', link: '#' }
+  const timelineData = [
+    { 
+      id: 1, 
+      title: 'Our History', 
+      desc: 'Read about the legacy of Camp Cha Samrat.', 
+      content: 'Established decades ago, Camp Cha Samrat has been the heart of our local cultural celebrations. From humble beginnings with a small pandal, we have grown into one of the most prominent mandals in the city. Our legacy is built on community service, grand visual storytelling, and an unwavering devotion that brings thousands of devotees together every year.' 
+    },
+    { 
+      id: 2, 
+      title: 'Gallery', 
+      desc: 'Explore photos and videos from previous years.', 
+      content: 'This section will house our vibrant gallery. Relive the spectacular aartis, the intricate idol designs of the past, the energetic dhol-tasha performances, and the joyous visarjan processions. (Images coming soon!)' 
+    },
+    { 
+      id: 3, 
+      title: 'Events Schedule', 
+      desc: 'Check out the upcoming aarti and cultural timings.', 
+      content: '• Morning Aarti: 8:00 AM Daily\n• Evening Maha Aarti: 7:30 PM Daily\n• Mahaprasad Distribution: Day 5 & Day 9 at 1:00 PM\n• Dhol Tasha Pathak Performance: Day 8 evening\n• Visarjan Miravnuk: Final Day starting at 4:00 PM.' 
+    },
+    { 
+      id: 4, 
+      title: 'Mandal Members', 
+      desc: 'Meet the dedicated karyakartas behind the festival.', 
+      content: 'Our mandal operates flawlessly thanks to our dedicated volunteers (Karyakartas). From crowd management and stage decoration to daily rituals and digital presence, our youth wing works day and night to ensure a safe and spiritually uplifting experience for all visitors.' 
+    }
   ];
 
   return (
     <div className="app-container">
-      {/* Background Video (Fixed) */}
       <video className="bg-video" autoPlay loop muted playsInline>
         <source src={bgVideo} type="video/mp4" />
       </video>
 
-      {/* Main Content (Scrollable) */}
       <div className="content">
         {step === 'HOME' && (
           <div className="scrollable-page">
             
-            {/* 1. Hero Section (Takes up exactly 1 screen height) */}
+            {/* Hero Section */}
             <section className="hero-section">
               <img src={centerImg} alt="Center Graphic" className="floating-image" /> 
               <button className="gold-btn" onClick={() => setStep('PAY_MANUAL')}>
                 <span className="btn-main-text">Contribute Now</span>
               </button>
+              
+              {/* Scroll Indicator */}
+              <div className="scroll-indicator">
+                <p>Scroll Down To Explore</p>
+                <div className="chevron-arrows">
+                  <span className="chevron"></span>
+                  <span className="chevron"></span>
+                  <span className="chevron"></span>
+                </div>
+              </div>
             </section>
 
-            {/* 2. Timeline Links Section */}
+            {/* Alternating Timeline Section */}
             <section className="timeline-section">
               <div className="timeline-container">
-                {/* Center glowing line */}
                 <div className="timeline-line"></div>
                 
-                {navLinks.map((item, index) => (
+                {timelineData.map((item, index) => (
                   <div key={item.id} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-                    <div className="timeline-dot"></div>
-                    <a href={item.link} className="glass-nav-card">
+                    <div className="glass-nav-card" onClick={() => setActiveInfoModal(item)}>
                       <span className="card-number">0{item.id}</span>
                       <h3>{item.title}</h3>
                       <p>{item.desc}</p>
-                    </a>
+                    </div>
                   </div>
                 ))}
               </div>
             </section>
-
           </div>
         )}
 
-        {/* Donation Modal (Fixed positioning so it floats over everything) */}
+        {activeInfoModal && (
+          <div className="modal-overlay" onClick={() => setActiveInfoModal(null)}>
+            <div className="donation-card info-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="close-btn" onClick={() => setActiveInfoModal(null)}>✕</button>
+              
+              <h2 className="donation-title" style={{ fontSize: '1.4rem' }}>
+                {activeInfoModal.title}
+              </h2>
+              
+              <div className="modal-body-text">
+                {activeInfoModal.content.split('\n').map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {step === 'PAY_MANUAL' && (
           <div className="modal-overlay">
             <div className="donation-card" style={{ maxHeight: '88vh', overflowY: 'auto' }}>
@@ -208,7 +251,6 @@ function App() {
         )}
       </div>
 
-      {/* Frame Overlay (Fixed over screen edges) */}
       <img src={borderOverlay} alt="Golden Border Overlay" className="border-overlay" /> 
     </div>
   );

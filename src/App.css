@@ -40,7 +40,6 @@ html, body {
   opacity: 0.8; 
 }
 
-/* Enable Scrolling */
 .content {
   position: absolute;
   top: 0;
@@ -70,12 +69,12 @@ html, body {
 }
 
 /* =========================================
-   3. HERO SECTION (LOGO & MAIN BUTTON)
+   3. HERO SECTION (LOGO, BUTTON, SCROLL)
    ========================================= */
 .hero-section {
   position: relative;
   width: 100%;
-  height: 100dvh; /* Takes exactly 1 full screen */
+  height: 100dvh; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,9 +82,9 @@ html, body {
 
 .floating-image {
   position: absolute;
-  top: 36%; /* Moved significantly up */
+  top: 36%; 
   left: 50%;
-  width: 230px; /* Slightly smaller image */
+  width: 230px; 
   max-width: 75vw; 
   height: auto;
   transform: translate(-50%, -50%); 
@@ -94,13 +93,13 @@ html, body {
 
 .gold-btn {
   position: absolute;
-  top: 60%; /* Moved up under the image */
+  top: 58%; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 24px; /* Reduced button size */
+  padding: 6px 20px; /* Reduced button size */
   z-index: 10;
   cursor: pointer;
   white-space: nowrap;
@@ -124,83 +123,150 @@ html, body {
 
 .btn-main-text {
   font-family: 'Oswald', sans-serif;
-  color: #ffffff; 
-  font-size: 1.05rem; /* Reduced font size */
+  color: #fffac2; /* Lightish yellow font */
+  font-size: 0.9rem; /* Reduced font size */
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Scroll Down Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.8;
+}
+
+.scroll-indicator p {
+  color: #fffac2;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.chevron-arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.chevron {
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #fffac2;
+  border-bottom: 2px solid #fffac2;
+  transform: rotate(45deg);
+  animation: scrollChevron 1.5s infinite;
+}
+
+.chevron:nth-child(1) { animation-delay: 0s; }
+.chevron:nth-child(2) { animation-delay: 0.15s; }
+.chevron:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes scrollChevron {
+  0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
 }
 
 /* =========================================
-   4. TIMELINE / NEXT PAGES BOXES
+   4. ALTERNATING STAGGERED TIMELINE
    ========================================= */
 .timeline-section {
   width: 100%;
-  padding: 40px 20px 120px 20px;
-  display: flex;
-  justify-content: center;
+  padding: 40px 20px 140px 20px;
 }
 
 .timeline-container {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
-  gap: 50px; /* Space between each row */
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* The vertical connecting line */
 .timeline-line {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 2px;
-  background: linear-gradient(180deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
+  width: 3px;
+  background: linear-gradient(180deg, rgba(218, 165, 32, 0), #ff4d4d 15%, #ff4d4d 85%, rgba(218, 165, 32, 0));
   transform: translateX(-50%);
   z-index: 1;
 }
 
 .timeline-item {
+  width: 50%;
   position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  z-index: 2;
+  margin-bottom: -30px; 
 }
 
 .timeline-item.left {
-  justify-content: flex-start;
+  left: 0;
+  padding-right: 40px;
+  padding-bottom: 60px; 
 }
 
 .timeline-item.right {
-  justify-content: flex-end;
-}
-
-/* Dots on the line */
-.timeline-dot {
-  position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 14px;
-  height: 14px;
-  background: #ffd700;
-  border: 2px solid #000;
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
-  z-index: 3;
+  padding-left: 40px;
+  margin-top: 80px; 
 }
 
-/* The Transparent Glass Link Box */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 3px;
+  background: #ffd700;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.timeline-item.left::after {
+  right: 0;
+}
+
+.timeline-item.right::after {
+  left: 0;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: #ffd700;
+  border: 3px solid #000;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.timeline-item.left::before {
+  right: -8px;
+}
+
+.timeline-item.right::before {
+  left: -8px;
+}
+
 .glass-nav-card {
-  width: 42%; /* Leaves space for the center line */
+  width: 100%; 
   padding: 24px 20px;
-  text-decoration: none;
+  cursor: pointer;
   
-  /* Frosted Glass Look */
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(218, 165, 32, 0.08) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -210,15 +276,12 @@ html, body {
   border-radius: 16px;
   
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .glass-nav-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(218, 165, 32, 0.15) 100%);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(218, 165, 32, 0.2);
   border-top: 1px solid #ffd700;
 }
@@ -228,6 +291,8 @@ html, body {
   font-size: 0.85rem;
   color: #ffd700;
   letter-spacing: 2px;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .glass-nav-card h3 {
@@ -236,6 +301,7 @@ html, body {
   font-size: 1.4rem;
   font-weight: 500;
   letter-spacing: 1px;
+  margin-bottom: 8px;
 }
 
 .glass-nav-card p {
@@ -245,34 +311,18 @@ html, body {
   line-height: 1.5;
 }
 
-/* Mobile Responsiveness for the Timeline */
-@media (max-width: 768px) {
-  .timeline-line {
-    left: 20px; /* Move line to the left edge */
-  }
-  .timeline-dot {
-    left: 20px;
-  }
-  .timeline-item.left, .timeline-item.right {
-    justify-content: flex-end; /* All boxes push to the right */
-  }
-  .glass-nav-card {
-    width: calc(100% - 50px); /* Fill space minus the line on the left */
-  }
-}
-
 /* =========================================
-   5. DONATION MODAL (GOLD-TINTED GLASS BOX)
+   5. DONATION & INFO MODALS
    ========================================= */
 .modal-overlay {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100dvh;
-  z-index: 500; /* High enough to float over timeline */
-  background: rgba(0, 0, 0, 0.5); /* Dimming background behind modal */
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  z-index: 500; 
+  background: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .donation-card {
@@ -288,8 +338,8 @@ html, body {
     rgba(255, 255, 255, 0.04) 0%, 
     rgba(218, 165, 32, 0.15) 100%
   ); 
-  backdrop-filter: blur(14px); 
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(20px); 
+  -webkit-backdrop-filter: blur(20px);
   
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-top: 1px solid rgba(218, 165, 32, 0.4); 
@@ -297,7 +347,25 @@ html, body {
   border-radius: 20px;
   padding: 24px 20px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.info-modal {
+  max-height: 75vh;
+  overflow-y: auto;
+  text-align: left; 
+}
+
+.modal-body-text {
+  font-family: 'Archivo', sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.modal-body-text p {
+  margin-bottom: 16px;
 }
 
 .close-btn {
@@ -365,7 +433,6 @@ html, body {
   display: block;
 }
 
-/* Enlarged QR Modal */
 .qr-modal-overlay {
   position: fixed;
   inset: 0;
