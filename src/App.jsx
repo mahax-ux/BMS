@@ -6,7 +6,7 @@ import borderOverlay from './assets/border_image.png';
 
 import gpayLogo from './assets/gpay.png';
 import phonepeLogo from './assets/phonepay.png';
-import instaLogo from './assets/insta.png'; // Make sure this PNG is in your assets folder
+import instaLogo from './assets/insta.png'; 
 
 import './App.css';
 
@@ -114,7 +114,6 @@ function App() {
           <div className="scrollable-page">
             
             <section className="hero-section">
-              {/* Header Tags */}
               <div className="top-header">
                 <span className="creator-tag">website by Mahant - 7483430871</span>
                 <span className="shloka-tag">
@@ -155,7 +154,6 @@ function App() {
               </div>
             </section>
 
-            {/* Single Line Contact Us Section */}
             <section className="contact-section">
               <h2 className="contact-title">Contact Us :</h2>
               <div className="contact-links-inline">
@@ -163,9 +161,9 @@ function App() {
                   📞 9538764241
                 </a>
                 <span className="contact-divider">|</span>
-                <a href="https://instagram.com/bms_cha_raja" target="_blank" rel="noopener noreferrer" className="inline-contact-item">
+                <a href="https://instagram.com/bms_camp_boys" target="_blank" rel="noopener noreferrer" className="inline-contact-item">
                   <img src={instaLogo} alt="Instagram" className="contact-icon" /> 
-                  @bms_cha_raja
+                  @bms_camp_boys
                 </a>
               </div>
             </section>
@@ -173,7 +171,6 @@ function App() {
           </div>
         )}
 
-        {/* Info Modals */}
         {activeInfoModal && (
           <div className="modal-overlay" onClick={() => setActiveInfoModal(null)}>
             <div className="donation-card info-modal" onClick={(e) => e.stopPropagation()}>
@@ -192,7 +189,6 @@ function App() {
           </div>
         )}
 
-        {/* Payment Modal */}
         {step === 'PAY_MANUAL' && (
           <div className="modal-overlay">
             <div className="donation-card" style={{ maxHeight: '88vh', overflowY: 'auto' }}>

@@ -74,7 +74,7 @@ html, body {
 .hero-section {
   position: relative;
   width: 100%;
-  height: 100vh; 
+  height: 100dvh; /* Locked strictly to screen height for perfect centering */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,9 +83,9 @@ html, body {
 /* --- UPDATED HEADER ALIGNMENT --- */
 .top-header {
   position: absolute;
-  top: 75px;   /* Pushed down to clear the thick top border */
-  left: 50px;  /* Pushed in to clear the left border */
-  right: 50px; /* Pushed in to clear the right border */
+  top: 45px;   /* Adjusted to sit tightly in the top corners */
+  left: 45px;  /* Clears the left border */
+  right: 45px; /* Clears the right border */
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -93,28 +93,24 @@ html, body {
   pointer-events: none; 
 }
 
-/* --- UPDATED CREATOR TAG (Color & Font) --- */
+/* --- UPDATED CREATOR TAG --- */
 .creator-tag {
   font-family: 'Oswald', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 1px;
-  color: #f5f5f5; /* Bright silver/white to contrast the gold */
+  color: #f5f5f5; 
   pointer-events: auto;
   text-align: left;
-  max-width: 45%;
+  white-space: nowrap; /* Forces text to stay on a single line */
   text-shadow: 0 2px 4px rgba(0,0,0,0.9);
 }
 
-/* --- UPDATED SHLOKA TAG (Font & Alignment) --- */
+/* --- UPDATED SHLOKA TAG --- */
 .shloka-tag {
-  font-family: 'Archivo', system-ui, sans-serif; /* Archivo renders Devanagari much cleaner */
+  font-family: 'Archivo', system-ui, sans-serif; 
   font-size: 0.8rem;
   line-height: 1.6;
-  text-align: center; /* Centers the two lines relative to each other */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 50%;
+  text-align: right; /* Forces strict right alignment */
   pointer-events: auto;
   
   background: linear-gradient(135deg, #fff7c2 0%, #ffd700 50%, #d4af37 100%);
@@ -123,6 +119,7 @@ html, body {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
 }
 
+/* Perfectly centers the PNG */
 .floating-image {
   position: absolute;
   top: 50%; 
