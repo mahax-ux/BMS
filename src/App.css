@@ -40,6 +40,7 @@ html, body {
   opacity: 0.8; 
 }
 
+/* Enable Scrolling */
 .content {
   position: absolute;
   top: 0;
@@ -48,6 +49,14 @@ html, body {
   height: 100%;
   z-index: 5; 
   background: rgba(0, 0, 0, 0.2); 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.scrollable-page {
+  width: 100%;
+  min-height: 100%;
 }
 
 .border-overlay {
@@ -58,17 +67,25 @@ html, body {
   object-fit: fill; 
   pointer-events: none; 
   z-index: 100; 
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 /* =========================================
-   3. HOME SCREEN (LOGO & MAIN BUTTON)
+   3. HERO SECTION (LOGO & MAIN BUTTON)
    ========================================= */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100dvh; /* Takes exactly 1 full screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .floating-image {
   position: absolute;
-  top: 45%; 
+  top: 36%; /* Moved significantly up */
   left: 50%;
-  width: 250px; 
+  width: 230px; /* Slightly smaller image */
   max-width: 75vw; 
   height: auto;
   transform: translate(-50%, -50%); 
@@ -77,14 +94,13 @@ html, body {
 
 .gold-btn {
   position: absolute;
-  top: 72%; 
+  top: 60%; /* Moved up under the image */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 32px;
+  padding: 8px 24px; /* Reduced button size */
   z-index: 10;
   cursor: pointer;
   white-space: nowrap;
@@ -109,16 +125,156 @@ html, body {
 .btn-main-text {
   font-family: 'Oswald', sans-serif;
   color: #ffffff; 
-  font-size: 1.2rem;
+  font-size: 1.05rem; /* Reduced font size */
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 /* =========================================
-   4. DONATION MODAL (GOLD-TINTED GLASS BOX)
+   4. TIMELINE / NEXT PAGES BOXES
    ========================================= */
+.timeline-section {
+  width: 100%;
+  padding: 40px 20px 120px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px; /* Space between each row */
+}
+
+/* The vertical connecting line */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.timeline-item.left {
+  justify-content: flex-start;
+}
+
+.timeline-item.right {
+  justify-content: flex-end;
+}
+
+/* Dots on the line */
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: #ffd700;
+  border: 2px solid #000;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
+  z-index: 3;
+}
+
+/* The Transparent Glass Link Box */
+.glass-nav-card {
+  width: 42%; /* Leaves space for the center line */
+  padding: 24px 20px;
+  text-decoration: none;
+  
+  /* Frosted Glass Look */
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(218, 165, 32, 0.08) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(218, 165, 32, 0.4);
+  border-radius: 16px;
+  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.glass-nav-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(218, 165, 32, 0.2);
+  border-top: 1px solid #ffd700;
+}
+
+.card-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  color: #ffd700;
+  letter-spacing: 2px;
+}
+
+.glass-nav-card h3 {
+  font-family: 'Oswald', sans-serif;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.glass-nav-card p {
+  font-family: 'Archivo', sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Mobile Responsiveness for the Timeline */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 20px; /* Move line to the left edge */
+  }
+  .timeline-dot {
+    left: 20px;
+  }
+  .timeline-item.left, .timeline-item.right {
+    justify-content: flex-end; /* All boxes push to the right */
+  }
+  .glass-nav-card {
+    width: calc(100% - 50px); /* Fill space minus the line on the left */
+  }
+}
+
+/* =========================================
+   5. DONATION MODAL (GOLD-TINTED GLASS BOX)
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 500; /* High enough to float over timeline */
+  background: rgba(0, 0, 0, 0.5); /* Dimming background behind modal */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
 .donation-card {
   position: absolute;
   top: 50%;
@@ -141,7 +297,6 @@ html, body {
   border-radius: 20px;
   padding: 24px 20px;
   text-align: center;
-  z-index: 15;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
@@ -186,7 +341,7 @@ html, body {
 }
 
 /* =========================================
-   5. QR, UPI COPY SECTION & MODAL
+   6. QR, UPI COPY SECTION & MODAL
    ========================================= */
 .qr-container {
   background: #ffffff; 
@@ -278,7 +433,6 @@ html, body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Minor Buttons */
 .qr-download-btn {
   background: rgba(218, 165, 32, 0.15); 
   border: 1px solid rgba(218, 165, 32, 0.3);
@@ -329,7 +483,7 @@ html, body {
 }
 
 /* =========================================
-   6. INSTRUCTIONS / STEPS
+   7. INSTRUCTIONS & ACTIONS
    ========================================= */
 .payment-steps {
   font-family: 'Archivo', sans-serif;
@@ -343,9 +497,6 @@ html, body {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
-/* =========================================
-   7. PAYMENT APP LAUNCHERS & ACTIONS
-   ========================================= */
 .apps-flex {
   display: flex; 
   gap: 12px; 

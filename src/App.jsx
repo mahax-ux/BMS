@@ -73,97 +73,130 @@ function App() {
     setIsQrMaximized(false);
   };
 
+  // Content for the 4 timeline glass boxes
+  const navLinks = [
+    { id: 1, title: 'Our History', desc: 'Read about the legacy of Camp Cha Samrat.', link: '#' },
+    { id: 2, title: 'Gallery', desc: 'Explore photos and videos from previous years.', link: '#' },
+    { id: 3, title: 'Events Schedule', desc: 'Check out the upcoming aarti and cultural timings.', link: '#' },
+    { id: 4, title: 'Mandal Members', desc: 'Meet the dedicated karyakartas behind the festival.', link: '#' }
+  ];
+
   return (
     <div className="app-container">
+      {/* Background Video (Fixed) */}
       <video className="bg-video" autoPlay loop muted playsInline>
         <source src={bgVideo} type="video/mp4" />
       </video>
 
+      {/* Main Content (Scrollable) */}
       <div className="content">
         {step === 'HOME' && (
-          <>
-            <img src={centerImg} alt="Center Graphic" className="floating-image" /> 
-            <button className="gold-btn" onClick={() => setStep('PAY_MANUAL')}>
-              <span className="btn-main-text">Contribute Now</span>
-            </button>
-          </>
+          <div className="scrollable-page">
+            
+            {/* 1. Hero Section (Takes up exactly 1 screen height) */}
+            <section className="hero-section">
+              <img src={centerImg} alt="Center Graphic" className="floating-image" /> 
+              <button className="gold-btn" onClick={() => setStep('PAY_MANUAL')}>
+                <span className="btn-main-text">Contribute Now</span>
+              </button>
+            </section>
+
+            {/* 2. Timeline Links Section */}
+            <section className="timeline-section">
+              <div className="timeline-container">
+                {/* Center glowing line */}
+                <div className="timeline-line"></div>
+                
+                {navLinks.map((item, index) => (
+                  <div key={item.id} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+                    <div className="timeline-dot"></div>
+                    <a href={item.link} className="glass-nav-card">
+                      <span className="card-number">0{item.id}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.desc}</p>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+          </div>
         )}
 
+        {/* Donation Modal (Fixed positioning so it floats over everything) */}
         {step === 'PAY_MANUAL' && (
-          <div className="donation-card" style={{ maxHeight: '88vh', overflowY: 'auto' }}>
-            <button className="close-btn" onClick={resetApp}>✕</button>
-            
-            <h2 className="donation-title">
-              {/* Left Vector */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector">
-                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#title-grad)"/>
-                <defs>
-                  <linearGradient id="title-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#fff7c2" />
-                    <stop offset="0.5" stopColor="#ffd700" />
-                    <stop offset="1" stopColor="#d4af37" />
-                  </linearGradient>
-                </defs>
-              </svg>
+          <div className="modal-overlay">
+            <div className="donation-card" style={{ maxHeight: '88vh', overflowY: 'auto' }}>
+              <button className="close-btn" onClick={resetApp}>✕</button>
               
-              CONTRIBUTE
+              <h2 className="donation-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector">
+                  <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#title-grad)"/>
+                  <defs>
+                    <linearGradient id="title-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#fff7c2" />
+                      <stop offset="0.5" stopColor="#ffd700" />
+                      <stop offset="1" stopColor="#d4af37" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                CONTRIBUTE
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector" style={{ transform: 'scaleX(-1)' }}>
+                  <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#title-grad)"/>
+                </svg>
+              </h2>
               
-              {/* Right Vector (Mirrored) */}
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector" style={{ transform: 'scaleX(-1)' }}>
-                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#title-grad)"/>
-              </svg>
-            </h2>
-            
-            {/* Clickable QR Code to Enlarge */}
-            <div className="qr-container" onClick={() => setIsQrMaximized(true)} title="Tap to Enlarge">
-              <img src={qrImageUrl} alt="UPI QR Code" className="qr-image" />
-            </div>
-            
-            <button onClick={handleDownloadQR} className="qr-download-btn">
-              ⬇ Download QR Code
-            </button>
-
-            <div className="upi-copy-wrapper">
-              <div className="upi-id-display">{UPI_ID}</div>
-              <button onClick={handleCopyUPI} className="upi-copy-btn">Copy</button>
-            </div>
-
-            <p className="payment-steps">
-              1. Download QR or Copy UPI ID.<br/>
-              2. Open your app using buttons below.<br/>
-              3. Scan from Gallery or Paste ID.
-            </p>
-
-            <div className="apps-flex">
-              <button className="white-glass-btn" onClick={() => handleAppLaunch('gpay', 'tez://')}>
-                <img src={gpayLogo} alt="GPay" className="app-logo-icon" /> GPay
+              <div className="qr-container" onClick={() => setIsQrMaximized(true)} title="Tap to Enlarge">
+                <img src={qrImageUrl} alt="UPI QR Code" className="qr-image" />
+              </div>
+              
+              <button onClick={handleDownloadQR} className="qr-download-btn">
+                ⬇ Download QR Code
               </button>
-              <button className="white-glass-btn" onClick={() => handleAppLaunch('phonepe', 'phonepe://')}>
-                <img src={phonepeLogo} alt="PhonePe" className="app-logo-icon" /> PhonePe
+
+              <div className="upi-copy-wrapper">
+                <div className="upi-id-display">{UPI_ID}</div>
+                <button onClick={handleCopyUPI} className="upi-copy-btn">Copy</button>
+              </div>
+
+              <p className="payment-steps">
+                1. Download QR or Copy UPI ID.<br/>
+                2. Open your app using buttons below.<br/>
+                3. Scan from Gallery or Paste ID.
+              </p>
+
+              <div className="apps-flex">
+                <button className="white-glass-btn" onClick={() => handleAppLaunch('gpay', 'tez://')}>
+                  <img src={gpayLogo} alt="GPay" className="app-logo-icon" /> GPay
+                </button>
+                <button className="white-glass-btn" onClick={() => handleAppLaunch('phonepe', 'phonepe://')}>
+                  <img src={phonepeLogo} alt="PhonePe" className="app-logo-icon" /> PhonePe
+                </button>
+              </div>
+
+              <button className="action-btn" onClick={() => setStep('SUCCESS')}>
+                I Have Paid
               </button>
             </div>
-
-            <button className="action-btn" onClick={() => setStep('SUCCESS')}>
-              I Have Paid
-            </button>
           </div>
         )}
 
         {step === 'SUCCESS' && (
-          <div className="donation-card success-card">
-            <button className="close-btn" onClick={resetApp}>✕</button>
-            <div className="success-icon">🙏</div>
-            <h2 className="donation-title">Thank You!</h2>
-            <p className="success-msg">
-              Please show your <b>payment history</b> to the mandal karyakarta and collect your Paavthi.
-            </p>
-            <button className="action-btn" onClick={resetApp}>
-              Done
-            </button>
+          <div className="modal-overlay">
+            <div className="donation-card success-card">
+              <button className="close-btn" onClick={resetApp}>✕</button>
+              <div className="success-icon">🙏</div>
+              <h2 className="donation-title">Thank You!</h2>
+              <p className="success-msg">
+                Please show your <b>payment history</b> to the mandal karyakarta and collect your Paavthi.
+              </p>
+              <button className="action-btn" onClick={resetApp}>
+                Done
+              </button>
+            </div>
           </div>
         )}
 
-        {/* Maximized QR Overlay */}
         {isQrMaximized && (
           <div className="qr-modal-overlay" onClick={() => setIsQrMaximized(false)}>
             <div className="qr-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -175,6 +208,7 @@ function App() {
         )}
       </div>
 
+      {/* Frame Overlay (Fixed over screen edges) */}
       <img src={borderOverlay} alt="Golden Border Overlay" className="border-overlay" /> 
     </div>
   );
