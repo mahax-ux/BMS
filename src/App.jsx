@@ -13,7 +13,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const UPI_ID = '8867456612@ptyes';
+const UPI_ID = '9538764241@ybl';
 const PAYEE_NAME = 'Camp Cha Samrat';
 
 function App() {
