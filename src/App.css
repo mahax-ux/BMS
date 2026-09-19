@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Caacupe+One&family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&family=Oswald:wght@400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap');
 
 /* =========================================
    1. CSS RESET & GLOBAL BASE
@@ -80,7 +80,6 @@ html, body {
   align-items: center;
 }
 
-/* --- EXTREME EDGES HEADER ALIGNMENT --- */
 .top-header {
   position: absolute;
   top: 32px;   
@@ -93,7 +92,7 @@ html, body {
   pointer-events: none; 
 }
 
-/* --- TWO-LINE LEFT-ALIGNED CREATOR TAG --- */
+/* --- CREATOR TAG --- */
 .creator-tag {
   font-family: 'Oswald', sans-serif;
   font-size: 0.72rem;
@@ -120,10 +119,10 @@ html, body {
   font-weight: 500;
 }
 
-/* --- EXTREME RIGHT SHLOKA TAG --- */
+/* --- UPDATED SHLOKA TAG (Font & Increased Size) --- */
 .shloka-tag {
-  font-family: 'Archivo', system-ui, sans-serif; 
-  font-size: 0.75rem;
+  font-family: 'Tiro Devanagari Sanskrit', serif; /* Traditional, crystal-clear Devanagari font */
+  font-size: 0.95rem; /* Increased size so it's fully readable */
   line-height: 1.5;
   text-align: right; 
   pointer-events: auto;
@@ -135,10 +134,10 @@ html, body {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
 }
 
-/* Perfectly centers the PNG */
+/* Brought the logo slightly lower (55%) */
 .floating-image {
   position: absolute;
-  top: 50%; 
+  top: 55%; 
   left: 50%;
   width: 230px; 
   max-width: 75vw; 
@@ -149,7 +148,7 @@ html, body {
 
 .gold-btn {
   position: absolute;
-  top: 75%; 
+  top: 78%; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -189,7 +188,7 @@ html, body {
 
 .scroll-indicator {
   position: absolute;
-  bottom: 8%;
+  bottom: 6%;
   display: flex;
   flex-direction: column;
   align-items: center;
