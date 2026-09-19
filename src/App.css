@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caacupe+One&family=Oswald:wght@400;500;600;700&display=swap');
+/* Swapped Archivo Black for regular Archivo */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Caacupe+One&family=Oswald:wght@400;500;600;700&display=swap');
 
 /* =========================================
    1. CSS RESET & GLOBAL BASE
@@ -131,17 +132,16 @@ html, body {
   width: 86%;
   max-width: 340px;
   
-  /* Highly transparent mix of crisp white and subtle gold gradient */
   background: linear-gradient(
     145deg, 
     rgba(255, 255, 255, 0.04) 0%, 
     rgba(218, 165, 32, 0.15) 100%
   ); 
-  backdrop-filter: blur(14px); /* Lowered blur for more transparency */
+  backdrop-filter: blur(14px); 
   -webkit-backdrop-filter: blur(14px);
   
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: 1px solid rgba(218, 165, 32, 0.4); /* Subtle gold highlight on top edge */
+  border-top: 1px solid rgba(218, 165, 32, 0.4); 
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   padding: 24px 20px;
@@ -168,12 +168,16 @@ html, body {
 
 .donation-title {
   font-family: 'Caacupe One', sans-serif;
-  color: #ffffff;
-  font-size: 1.6rem;
-  letter-spacing: 1px;
+  font-size: 1.8rem;
+  letter-spacing: 1.5px;
   margin-bottom: 16px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   font-weight: normal; 
+  
+  /* Gold Text Gradient */
+  background: linear-gradient(180deg, #fff7c2 0%, #ffd700 60%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
 }
 
 /* =========================================
@@ -184,7 +188,7 @@ html, body {
   padding: 8px; 
   border-radius: 12px; 
   margin: 0 auto 10px auto; 
-  border: 1px solid rgba(218, 165, 32, 0.5); /* Matching gold border */
+  border: 1px solid rgba(218, 165, 32, 0.5); 
   width: fit-content;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
@@ -196,7 +200,7 @@ html, body {
 }
 
 .qr-download-btn {
-  background: rgba(218, 165, 32, 0.15); /* Gold tinted background */
+  background: rgba(218, 165, 32, 0.15); 
   border: 1px solid rgba(218, 165, 32, 0.3);
   padding: 6px 14px;
   font-size: 0.8rem;
@@ -219,13 +223,18 @@ html, body {
 }
 
 .upi-id-display {
-  background: rgba(0,0,0,0.4); 
-  border: 1px solid rgba(218, 165, 32, 0.3); 
+  background: rgba(0,0,0,0.5); 
+  border: 1px solid rgba(218, 165, 32, 0.4); 
   padding: 6px 10px; 
   border-radius: 8px; 
-  color: #ffffff; 
   font-size: 0.85rem; 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  font-family: 'Oswald', sans-serif;
+  
+  /* Subtle White-Gold Gradient for UPI ID */
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffeba1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .upi-copy-btn {
@@ -244,15 +253,16 @@ html, body {
    6. INSTRUCTIONS / STEPS
    ========================================= */
 .payment-steps {
-  font-family: 'Archivo Black', sans-serif;
+  /* Switched to clean, regular Archivo font (Not bold) */
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400; 
   color: #ffffff;
-  font-size: 0.65rem; 
+  font-size: 0.75rem; 
   text-align: left;
   margin: 0 auto 14px auto;
   width: fit-content;
   line-height: 1.5;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-  font-weight: normal; 
 }
 
 /* =========================================
