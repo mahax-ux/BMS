@@ -82,7 +82,7 @@ html, body {
 
 .floating-image {
   position: absolute;
-  top: 36%; 
+  top: 50%; 
   left: 50%;
   width: 230px; 
   max-width: 75vw; 
@@ -93,13 +93,13 @@ html, body {
 
 .gold-btn {
   position: absolute;
-  top: 58%; 
+  top: 75%; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 20px; /* Reduced button size */
+  padding: 6px 20px; 
   z-index: 10;
   cursor: pointer;
   white-space: nowrap;
@@ -123,15 +123,14 @@ html, body {
 
 .btn-main-text {
   font-family: 'Oswald', sans-serif;
-  color: #fffac2; /* Lightish yellow font */
-  font-size: 0.9rem; /* Reduced font size */
+  color: #fffac2; 
+  font-size: 0.9rem; 
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-/* Scroll Down Indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 8%;
@@ -182,7 +181,7 @@ html, body {
    ========================================= */
 .timeline-section {
   width: 100%;
-  padding: 40px 20px 140px 20px;
+  padding: 40px 20px 80px 20px; /* Reduced bottom padding */
 }
 
 .timeline-container {
@@ -198,7 +197,8 @@ html, body {
   bottom: 0;
   left: 50%;
   width: 3px;
-  background: linear-gradient(180deg, rgba(218, 165, 32, 0), #ff4d4d 15%, #ff4d4d 85%, rgba(218, 165, 32, 0));
+  /* Reverted back to the full golden gradient */
+  background: linear-gradient(180deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
   transform: translateX(-50%);
   z-index: 1;
 }
@@ -312,7 +312,81 @@ html, body {
 }
 
 /* =========================================
-   5. DONATION & INFO MODALS
+   5. CONTACT US SECTION
+   ========================================= */
+.contact-section {
+  width: 100%;
+  padding: 0 20px 100px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.contact-title {
+  font-family: 'Caacupe One', 'Oswald', sans-serif;
+  color: #ffd700;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+  margin-bottom: 8px;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 20px;
+  text-decoration: none;
+  
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  border: 1px solid rgba(218, 165, 32, 0.4);
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contact-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+}
+
+.contact-btn:active {
+  transform: scale(0.98);
+}
+
+.insta-btn {
+  background: linear-gradient(45deg, rgba(240, 148, 51, 0.2), rgba(230, 104, 60, 0.2), rgba(220, 39, 67, 0.2), rgba(204, 35, 102, 0.2), rgba(188, 24, 136, 0.2));
+  border: 1px solid rgba(220, 39, 67, 0.5);
+}
+
+.insta-btn:hover {
+  background: linear-gradient(45deg, rgba(240, 148, 51, 0.3), rgba(230, 104, 60, 0.3), rgba(220, 39, 67, 0.3), rgba(204, 35, 102, 0.3), rgba(188, 24, 136, 0.3));
+}
+
+/* =========================================
+   6. DONATION & INFO MODALS
    ========================================= */
 .modal-overlay {
   position: fixed;
@@ -409,7 +483,7 @@ html, body {
 }
 
 /* =========================================
-   6. QR, UPI COPY SECTION & MODAL
+   7. QR, UPI COPY SECTION & MODAL
    ========================================= */
 .qr-container {
   background: #ffffff; 
@@ -550,7 +624,7 @@ html, body {
 }
 
 /* =========================================
-   7. INSTRUCTIONS & ACTIONS
+   8. INSTRUCTIONS & ACTIONS
    ========================================= */
 .payment-steps {
   font-family: 'Archivo', sans-serif;
@@ -631,7 +705,7 @@ html, body {
 }
 
 /* =========================================
-   8. SUCCESS SCREEN & ANIMATIONS
+   9. SUCCESS SCREEN & ANIMATIONS
    ========================================= */
 .success-msg {
   color: rgba(255,255,255,0.9);

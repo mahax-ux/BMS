@@ -112,14 +112,12 @@ function App() {
         {step === 'HOME' && (
           <div className="scrollable-page">
             
-            {/* Hero Section */}
             <section className="hero-section">
               <img src={centerImg} alt="Center Graphic" className="floating-image" /> 
               <button className="gold-btn" onClick={() => setStep('PAY_MANUAL')}>
                 <span className="btn-main-text">Contribute Now</span>
               </button>
               
-              {/* Scroll Indicator */}
               <div className="scroll-indicator">
                 <p>Scroll Down To Explore</p>
                 <div className="chevron-arrows">
@@ -130,7 +128,6 @@ function App() {
               </div>
             </section>
 
-            {/* Alternating Timeline Section */}
             <section className="timeline-section">
               <div className="timeline-container">
                 <div className="timeline-line"></div>
@@ -146,6 +143,20 @@ function App() {
                 ))}
               </div>
             </section>
+
+            {/* Contact Us Section */}
+            <section className="contact-section">
+              <h2 className="contact-title">Contact Us</h2>
+              <div className="contact-buttons">
+                <a href="tel:9538764241" className="contact-btn">
+                  📞 9538764241
+                </a>
+                <a href="https://instagram.com/bms_cha_raja" target="_blank" rel="noopener noreferrer" className="contact-btn insta-btn">
+                  📸 @bms_cha_raja
+                </a>
+              </div>
+            </section>
+
           </div>
         )}
 
