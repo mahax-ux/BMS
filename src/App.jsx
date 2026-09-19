@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
-import centerImg from './assets/image.png';
-import borderOverlay from './assets/border_image.png';
+import centerImg from './assets/image.png'; /*[cite: 1]*/
+import borderOverlay from './assets/border_image.png'; /**/
+
+import gpayLogo from './assets/gpay.png';
+import phonepeLogo from './assets/phonepay.png';
 
 import './App.css';
 
@@ -15,7 +18,7 @@ const PAYEE_NAME = 'Camp Cha Samrat';
 
 function App() {
   const [step, setStep] = useState('HOME'); 
-  const [actionTaken, setActionTaken] = useState(false); // Tracks if they copied/downloaded
+  const [actionTaken, setActionTaken] = useState(false);
 
   const logTransaction = async (method) => {
     try {
@@ -34,7 +37,6 @@ function App() {
   const upiString = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR`;
   const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
 
-  // Download QR Code Image
   const handleDownloadQR = async () => {
     setActionTaken(true);
     try {
@@ -49,23 +51,20 @@ function App() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      // Fallback if fetch fails due to browser security
       window.open(qrImageUrl, '_blank');
     }
   };
 
-  // Copy UPI ID to clipboard
   const handleCopyUPI = async () => {
     setActionTaken(true);
     try {
       await navigator.clipboard.writeText(UPI_ID);
-      alert('✅ UPI ID Copied! You can now paste it in your payment app.');
+      alert('✅ UPI ID Copied! Paste it in your payment app.');
     } catch (err) {
       console.error('Failed to copy', err);
     }
   };
 
-  // Launch apps directly to their home screens
   const handleAppLaunch = (provider, scheme) => {
     logTransaction(provider);
     window.location.href = scheme;
@@ -85,7 +84,7 @@ function App() {
       <div className="content">
         {step === 'HOME' && (
           <>
-            <img src={centerImg} alt="Center Graphic" className="floating-image" />
+            <img src={centerImg} alt="Center Graphic" className="floating-image" /> {/*[cite: 1]*/}
             <button className="gold-btn" onClick={() => setStep('PAY_MANUAL')}>
               <span className="btn-main-text">Contribute Now</span>
             </button>
@@ -93,57 +92,57 @@ function App() {
         )}
 
         {step === 'PAY_MANUAL' && (
-          <div className="donation-card" style={{ maxHeight: '85vh', overflowY: 'auto' }}>
+          <div className="donation-card" style={{ maxHeight: '88vh', overflowY: 'auto' }}>
             <button className="close-btn" onClick={resetApp}>✕</button>
             
             <h2 className="donation-title">Contribute</h2>
             
-            {/* --- 1. QR Code Section --- */}
+            {/* QR Code Section */}
             <div style={{
-              background: '#fff', padding: '10px', borderRadius: '12px', 
-              margin: '0 auto 10px auto', border: '2px solid #d4af37', width: 'fit-content'
+              background: '#fff', padding: '8px', borderRadius: '12px', 
+              margin: '0 auto 8px auto', border: '2px solid #d4af37', width: 'fit-content'
             }}>
-              <img src={qrImageUrl} alt="UPI QR Code" style={{ width: '150px', height: '150px', display: 'block' }} />
+              <img src={qrImageUrl} alt="UPI QR Code" style={{ width: '135px', height: '135px', display: 'block' }} />
             </div>
             
-            <button onClick={handleDownloadQR} className="pay-app-btn" style={{background: 'rgba(218, 165, 32, 0.15)', padding: '8px 16px', fontSize: '0.85rem', marginBottom: '15px'}}>
+            <button onClick={handleDownloadQR} className="pay-app-btn" style={{background: 'rgba(218, 165, 32, 0.15)', padding: '6px 14px', fontSize: '0.8rem', marginBottom: '12px'}}>
               ⬇ Download QR Code
             </button>
 
-            {/* --- 2. UPI Copy Section --- */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '15px' }}>
+            {/* UPI Copy Section */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '12px' }}>
               <div style={{
                 background: 'rgba(0,0,0,0.6)', border: '1px solid #d4af37', 
-                padding: '8px 12px', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', letterSpacing: '0.5px'
+                padding: '6px 10px', borderRadius: '8px', color: '#fff', fontSize: '0.8rem', letterSpacing: '0.5px'
               }}>
                 {UPI_ID}
               </div>
               <button onClick={handleCopyUPI} style={{
                 background: '#d4af37', border: 'none', borderRadius: '8px', 
-                padding: '9px 15px', color: '#000', fontWeight: 'bold', cursor: 'pointer', fontFamily: 'inherit'
+                padding: '7px 12px', color: '#000', fontWeight: 'bold', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.8rem'
               }}>
                 Copy
               </button>
             </div>
 
-            {/* --- Instructions --- */}
-            <p className="success-msg" style={{ fontSize: '0.75rem', color: '#ffd700', textAlign: 'left', margin: '0 auto 15px auto', width: 'fit-content', lineHeight: '1.4' }}>
-              <b>1.</b> Take a screenshot / Download QR, or Copy ID.<br/>
-              <b>2.</b> Open your app using the buttons below.<br/>
-              <b>3.</b> Scan from Gallery, or Paste the UPI ID.
+            {/* Instructions */}
+            <p className="success-msg" style={{ fontSize: '0.7rem', color: '#ffd700', textAlign: 'left', margin: '0 auto 12px auto', width: 'fit-content', lineHeight: '1.3' }}>
+              <b>1.</b> Download QR or Copy UPI ID.<br/>
+              <b>2.</b> Open your app using buttons below.<br/>
+              <b>3.</b> Scan from Gallery or Paste ID.
             </p>
 
-            {/* --- App Launchers --- */}
-            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
-              <button className="pay-app-btn" style={{ padding: '10px', flex: 1, fontSize: '0.8rem', background: actionTaken ? 'rgba(218, 165, 32, 0.4)' : '' }} onClick={() => handleAppLaunch('gpay', 'tez://')}>
-                Open GPay
+            {/* White-Transparent App Launchers with PNG Logos */}
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '16px' }}>
+              <button className="white-glass-btn" onClick={() => handleAppLaunch('gpay', 'tez://')}>
+                <img src={gpayLogo} alt="GPay" className="app-logo-icon" /> GPay
               </button>
-              <button className="pay-app-btn" style={{ padding: '10px', flex: 1, fontSize: '0.8rem', background: actionTaken ? 'rgba(218, 165, 32, 0.4)' : '' }} onClick={() => handleAppLaunch('phonepe', 'phonepe://')}>
-                Open PhonePe
+              <button className="white-glass-btn" onClick={() => handleAppLaunch('phonepe', 'phonepe://')}>
+                <img src={phonepeLogo} alt="PhonePe" className="app-logo-icon" /> PhonePe
               </button>
             </div>
 
-            <button className="action-btn" onClick={() => setStep('SUCCESS')}>
+            <button className="action-btn" onClick={() => setStep('SUCCESS')} style={{ padding: '10px' }}>
               I Have Paid
             </button>
           </div>
@@ -164,7 +163,7 @@ function App() {
         )}
       </div>
 
-      <img src={borderOverlay} alt="Golden Border Overlay" className="border-overlay" /> 
+      <img src={borderOverlay} alt="Golden Border Overlay" className="border-overlay" /> {/**/}
     </div>
   );
 }
