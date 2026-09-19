@@ -18,57 +18,43 @@ const PAYEE_NAME = 'Camp Cha Samrat';
 
 function App() {
   const [step, setStep] = useState('HOME'); 
-  const [activeProvider, setActiveProvider] = useState('');
 
-  const logTransaction = async () => {
+  const logTransaction = async (method) => {
     try {
       const payload = { 
         amount: 0, 
-        app_used: activeProvider,
+        app_used: method,
         status: 'initiated',
         donor_name: 'Anonymous'
       };
-      const { error } = await supabase.from('transactions').insert([payload]);
-      if (error) throw error;
+      await supabase.from('transactions').insert([payload]);
     } catch (error) {
       console.error('Database log failed:', error.message);
     }
   };
 
-  const handlePaymentLaunch = async (provider) => {
-    setActiveProvider(provider);
-    await logTransaction(); 
-
-    // 1. Copy the UPI ID to the user's clipboard
-    try {
-      await navigator.clipboard.writeText(UPI_ID);
-      alert(`UPI ID Copied: ${UPI_ID}\n\nPaste this in your app to send your contribution!`);
-    } catch (err) {
-      console.log("Clipboard access denied, proceeding anyway.");
+  const handleDirectPay = (provider) => {
+    logTransaction(provider);
+    
+    // Construct the standard payment data
+    const baseParams = `pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR`;
+    
+    // Route to the specific app using deep links
+    let intentUrl = `upi://pay?${baseParams}`; // Universal fallback
+    
+    if (provider === 'gpay') {
+      intentUrl = `tez://upi/pay?${baseParams}`;
+    } else if (provider === 'phonepe') {
+      intentUrl = `phonepe://pay?${baseParams}`;
+    } else if (provider === 'paytm') {
+      intentUrl = `paytmmp://pay?${baseParams}`;
     }
 
-    // 2. Launch the app purely to its home screen (no payment intent parameters)
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Launch the app
+    window.location.href = intentUrl;
     
-    if (isMobile) {
-      if (provider === 'gpay') {
-        window.location.href = 'tez://';
-      } else if (provider === 'phonepe') {
-        window.location.href = 'phonepe://';
-      } else if (provider === 'paytm') {
-        window.location.href = 'paytmmp://';
-      } else if (provider === 'whatsapp') {
-        window.location.href = 'whatsapp://';
-      } else {
-        alert(`Please open your UPI app and pay to: ${UPI_ID}`);
-      }
-    } else {
-      console.log(`💻 PC Test Mode: Copied ${UPI_ID}`);
-    }
-    
-    setTimeout(() => { 
-      setStep('SUCCESS'); 
-    }, 5000);
+    // Move to success screen in the background
+    setTimeout(() => setStep('SUCCESS'), 2500);
   };
 
   const resetApp = () => {
@@ -85,52 +71,35 @@ function App() {
         {step === 'HOME' && (
           <>
             <img src={centerImg} alt="Center Graphic" className="floating-image" />
-            <button className="gold-btn" onClick={() => setStep('OPTIONS')}>
+            <button className="gold-btn" onClick={() => setStep('PAY_OPTIONS')}>
               <span className="btn-main-text">Contribute Now</span>
             </button>
           </>
         )}
 
-        {step !== 'HOME' && step !== 'SUCCESS' && (
+        {step === 'PAY_OPTIONS' && (
           <div className="donation-card">
             <button className="close-btn" onClick={resetApp}>✕</button>
+            
+            <h2 className="donation-title">Pay Directly via App</h2>
+            <p className="success-msg" style={{ fontSize: '0.85rem', marginBottom: '20px' }}>
+              Select your app below to open it directly.
+            </p>
 
-            {step === 'OPTIONS' && (
-              <>
-                <h2 className="donation-title">Select App</h2>
-                <div className="apps-container">
-                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('gpay')}>
-                    <img src={gpayLogo} alt="GPay" className="brand-logo" /> GPay
-                  </button>
-                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('phonepe')}>
-                    <img src={phonepeLogo} alt="PhonePe" className="brand-logo" /> PhonePe
-                  </button>
-                  <button className="pay-app-btn secondary-toggle" onClick={() => setStep('OTHER_OPTIONS')}>
-                    Other Options
-                  </button>
-                </div>
-              </>
-            )}
-
-            {step === 'OTHER_OPTIONS' && (
-              <>
-                <h2 className="donation-title">Other Payment Apps</h2>
-                <div className="apps-container">
-                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('whatsapp')}>
-                    WhatsApp Pay
-                  </button>
-                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('paytm')}>
-                    Paytm
-                  </button>
-                  <button className="pay-app-btn" onClick={() => handlePaymentLaunch('generic_upi')}>
-                    Any UPI App
-                  </button>
-                  <button className="close-modal-btn" onClick={() => setStep('OPTIONS')} style={{marginTop: '8px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.6)', cursor: 'pointer', padding: '8px', fontWeight: '500'}}>
-                    Back
-                  </button>
-                </div>
-              </>
-            )}
+            <div className="apps-container">
+              <button className="pay-app-btn" onClick={() => handleDirectPay('gpay')}>
+                <img src={gpayLogo} alt="GPay" className="brand-logo" /> Open in GPay
+              </button>
+              <button className="pay-app-btn" onClick={() => handleDirectPay('phonepe')}>
+                <img src={phonepeLogo} alt="PhonePe" className="brand-logo" /> Open in PhonePe
+              </button>
+              <button className="pay-app-btn" onClick={() => handleDirectPay('paytm')}>
+                Open in Paytm
+              </button>
+              <button className="pay-app-btn secondary-toggle" onClick={() => handleDirectPay('generic')}>
+                Other UPI App
+              </button>
+            </div>
           </div>
         )}
 
@@ -140,7 +109,7 @@ function App() {
             <div className="success-icon">🙏</div>
             <h2 className="donation-title" style={{color: '#ffd700'}}>Thank You!</h2>
             <p className="success-msg">
-              Please show your <b>payment history</b> to mandal karyakarta and collect your Paavthi.
+              Please show your <b>payment history</b> to the mandal karyakarta and collect your Paavthi.
             </p>
             <button className="action-btn generate-btn" onClick={resetApp}>
               Done
