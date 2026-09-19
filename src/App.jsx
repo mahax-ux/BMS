@@ -1,3 +1,4 @@
+// App.jsx
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
@@ -15,17 +16,15 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const UPI_ID = '8867456612@ptyes';
 const PAYEE_NAME = 'Camp Cha Samrat';
-const SUGGESTED_AMOUNTS = [101, 201, 501, 1001];
 
 function App() {
   const [step, setStep] = useState('HOME'); 
-  const [amount, setAmount] = useState('');
   const [activeProvider, setActiveProvider] = useState('');
 
   const logTransaction = async () => {
     try {
       const payload = { 
-        amount: parseFloat(amount) || 0, 
+        amount: 0, // Amount is now entered in the UPI app, logged as 0 here
         app_used: activeProvider,
         status: 'initiated',
         donor_name: 'Anonymous'
@@ -37,22 +36,14 @@ function App() {
     }
   };
 
-  const handleProceedToPay = () => {
-    if (!parseFloat(amount) || parseFloat(amount) <= 0) {
-      alert('Please enter a valid donation amount');
-      return;
-    }
-    setStep('OPTIONS');
-  };
-
   const handlePaymentLaunch = async (provider) => {
     setActiveProvider(provider);
     await logTransaction(); 
 
-    const baseParams = `pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amount)}&cu=INR&tn=${encodeURIComponent('Donation')}`;
+    // Removed the &am= parameter. This bypasses the locked-amount intent errors.
+    const baseParams = `pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR&tn=${encodeURIComponent('Donation')}`;
     
-    // Explicit app deep links to prevent all generic handlers from routing to WhatsApp
-    let intentUrl = `upi://pay?${baseParams}`; // Default universal fallback
+    let intentUrl = `upi://pay?${baseParams}`;
 
     if (provider === 'gpay') {
       intentUrl = `tez://upi/pay?${baseParams}`;
@@ -61,7 +52,7 @@ function App() {
     } else if (provider === 'paytm') {
       intentUrl = `paytmmp://pay?${baseParams}`;
     } else if (provider === 'whatsapp') {
-      intentUrl = `whatsapp://send?text=${encodeURIComponent('Pay ₹' + amount + ' to ' + UPI_ID)}`;
+      intentUrl = `whatsapp://send?text=${encodeURIComponent('Pay ' + PAYEE_NAME + ' via UPI: ' + UPI_ID)}`;
     }
     
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -78,7 +69,6 @@ function App() {
 
   const resetApp = () => {
     setStep('HOME');
-    setAmount('');
   };
 
   return (
@@ -91,7 +81,7 @@ function App() {
         {step === 'HOME' && (
           <>
             <img src={centerImg} alt="Center Graphic" className="floating-image" />
-            <button className="gold-btn" onClick={() => setStep('AMOUNT')}>
+            <button className="gold-btn" onClick={() => setStep('OPTIONS')}>
               <span className="btn-main-text">Contribute Now</span>
             </button>
           </>
@@ -101,28 +91,9 @@ function App() {
           <div className="donation-card">
             <button className="close-btn" onClick={resetApp}>✕</button>
 
-            {step === 'AMOUNT' && (
-              <>
-                <h2 className="donation-title">Enter your Contribution</h2>
-                <div className="input-wrapper">
-                  <span className="currency-symbol">₹</span>
-                  <input type="number" inputMode="decimal" className="amount-input" placeholder="0" value={amount} onChange={(e) => setAmount(e.target.value)} />
-                </div>
-                <div className="suggestion-chips">
-                  {SUGGESTED_AMOUNTS.map((val) => (
-                    <button key={val} className={`chip-btn ${amount === val.toString() ? 'active' : ''}`} onClick={() => setAmount(val.toString())}>
-                      ₹{val}
-                    </button>
-                  ))}
-                </div>
-                <button className="action-btn" onClick={handleProceedToPay}>Proceed to Payment</button>
-              </>
-            )}
-
             {step === 'OPTIONS' && (
               <>
                 <h2 className="donation-title">Select App</h2>
-                <p className="pay-amount-label">Amount: ₹{amount}</p>
                 <div className="apps-container">
                   <button className="pay-app-btn" onClick={() => handlePaymentLaunch('gpay')}>
                     <img src={gpayLogo} alt="GPay" className="brand-logo" /> GPay
@@ -140,7 +111,6 @@ function App() {
             {step === 'OTHER_OPTIONS' && (
               <>
                 <h2 className="donation-title">Other Payment Apps</h2>
-                <p className="pay-amount-label">Amount: ₹{amount}</p>
                 <div className="apps-container">
                   <button className="pay-app-btn" onClick={() => handlePaymentLaunch('whatsapp')}>
                     WhatsApp Pay
@@ -151,7 +121,7 @@ function App() {
                   <button className="pay-app-btn" onClick={() => handlePaymentLaunch('generic_upi')}>
                     Any UPI App
                   </button>
-                  <button className="close-modal-btn" onClick={() => setStep('OPTIONS')} style={{marginTop: '8px'}}>
+                  <button className="close-modal-btn" onClick={() => setStep('OPTIONS')} style={{marginTop: '8px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.6)', cursor: 'pointer', padding: '8px', fontWeight: '500'}}>
                     Back
                   </button>
                 </div>

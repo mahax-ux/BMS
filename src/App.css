@@ -1,3 +1,4 @@
+/* App.css */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@500;600;700;800&display=swap');
 
 * {
@@ -146,62 +147,6 @@ html, body {
   text-transform: uppercase;
 }
 
-.input-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 2px solid rgba(218, 165, 32, 0.6);
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 18px;
-}
-
-.currency-symbol {
-  font-size: 1.4rem;
-  font-weight: 500;
-  margin-right: 6px;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.amount-input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-}
-
-.suggestion-chips {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-  margin-bottom: 20px;
-}
-
-.chip-btn {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px; 
-  color: rgba(255, 255, 255, 0.7);
-  padding: 8px 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.chip-btn.active {
-  background: rgba(218, 165, 32, 0.15);
-  border-color: rgba(218, 165, 32, 0.6);
-  color: #ffd700;
-}
-
 .action-btn {
   width: 100%;
   padding: 12px;
@@ -213,14 +158,6 @@ html, body {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.pay-amount-label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 14px;
-  text-transform: uppercase;
 }
 
 .apps-container {
