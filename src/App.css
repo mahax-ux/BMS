@@ -1,5 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caacupe+One&family=Oswald:wght@400;500;600;700&display=swap');
 
+/* =========================================
+   1. CSS RESET & GLOBAL BASE
+   ========================================= */
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +17,9 @@ html, body {
   font-family: 'Oswald', sans-serif;
 }
 
-/* Master Container */
+/* =========================================
+   2. BACKGROUND & MAIN CONTAINERS
+   ========================================= */
 .app-container {
   position: relative;
   width: 100vw;
@@ -24,7 +29,6 @@ html, body {
   z-index: 0;
 }
 
-/* Background Video */
 .bg-video {
   position: absolute;
   top: 0;
@@ -36,7 +40,6 @@ html, body {
   opacity: 0.8; 
 }
 
-/* Content Area */
 .content {
   position: absolute;
   top: 0;
@@ -47,207 +50,6 @@ html, body {
   background: rgba(0, 0, 0, 0.2); 
 }
 
-/* Centered Bouncing Logo */
-.floating-image {
-  position: absolute;
-  top: 45%; 
-  left: 50%;
-  width: 250px; 
-  max-width: 75vw; 
-  height: auto;
-  transform: translate(-50%, -50%); 
-  
-  filter: 
-    drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.7)) 
-    drop-shadow(0px 0px 20px rgba(255, 215, 0, 0.45)) 
-    drop-shadow(0px 0px 45px rgba(218, 165, 32, 0.35));
-  
-  animation: float 3.5s ease-in-out infinite;
-}
-
-/* Restored Light Golden Glass Button */
-.gold-btn {
-  position: absolute;
-  top: 72%; 
-  left: 50%;
-  transform: translateX(-50%);
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  
-  padding: 10px 32px;
-  z-index: 10;
-  cursor: pointer;
-  white-space: nowrap;
-  
-  /* Lighter glassmorphism */
-  background: rgba(255, 215, 0, 0.12); 
-  backdrop-filter: blur(8px); 
-  -webkit-backdrop-filter: blur(8px); 
-  
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  border-top: 1px solid rgba(255, 215, 0, 0.7);
-  border-radius: 50px;
-  
-  box-shadow: 
-    0 10px 25px rgba(0, 0, 0, 0.6), 
-    inset 0 0 15px rgba(255, 215, 0, 0.15); 
-    
-  transition: all 0.2s ease;
-}
-
-.gold-btn:active {
-  transform: translate(-50%, 2px) scale(0.98);
-  background: rgba(255, 215, 0, 0.18);
-  box-shadow: 
-    0 5px 15px rgba(0, 0, 0, 0.7), 
-    inset 0 0 20px rgba(255, 215, 0, 0.25);
-}
-
-.btn-main-text {
-  font-family: 'Oswald', sans-serif;
-  color: #ffd700; 
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
-}
-
-/* Glass Transparent Donation Modal */
-.donation-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 86%;
-  max-width: 340px;
-  
-  background: linear-gradient(
-    180deg, 
-    rgba(25, 20, 10, 0.85) 0%, 
-    rgba(10, 8, 4, 0.95) 100%
-  );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  
-  border: 1px solid rgba(218, 165, 32, 0.4);
-  border-top: 1px solid rgba(255, 235, 150, 0.8);
-  border-radius: 20px;
-  padding: 24px 20px;
-  text-align: center;
-  z-index: 15;
-  box-shadow: 
-    0 15px 35px rgba(0, 0, 0, 0.8),
-    0 0 25px rgba(218, 165, 32, 0.15);
-}
-
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: none;
-  border: none;
-  color: #ffd700;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-.donation-title {
-  color: #ffd700;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-}
-
-/* Basic Payment buttons (like Download QR) */
-.pay-app-btn {
-  border-radius: 10px;
-  border: 1px solid rgba(218, 165, 32, 0.6);
-  color: #ffd700;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.pay-app-btn:active {
-  transform: scale(0.97);
-}
-
-/* White Transparent Glass Buttons for GPay & PhonePe */
-.white-glass-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  
-  padding: 10px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 12px;
-  
-  color: #fff;
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-
-.white-glass-btn:active {
-  transform: scale(0.96);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.app-logo-icon {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-}
-
-/* Restored Solid Golden Action Button */
-.action-btn {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(180deg, #ffd700 0%, #d4af37 100%);
-  border: none;
-  border-radius: 12px;
-  color: #000;
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 0.15s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.action-btn:active {
-  transform: scale(0.98);
-}
-
-.success-icon {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-/* Frame overlay */
 .border-overlay {
   position: absolute;
   inset: 0; 
@@ -257,6 +59,281 @@ html, body {
   pointer-events: none; 
   z-index: 100; 
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* =========================================
+   3. HOME SCREEN (LOGO & MAIN BUTTON)
+   ========================================= */
+.floating-image {
+  position: absolute;
+  top: 45%; 
+  left: 50%;
+  width: 250px; 
+  max-width: 75vw; 
+  height: auto;
+  transform: translate(-50%, -50%); 
+  filter: 
+    drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.7)) 
+    drop-shadow(0px 0px 20px rgba(255, 215, 0, 0.45)) 
+    drop-shadow(0px 0px 45px rgba(218, 165, 32, 0.35));
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.gold-btn {
+  position: absolute;
+  top: 72%; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 32px;
+  z-index: 10;
+  cursor: pointer;
+  white-space: nowrap;
+  
+  background: rgba(255, 215, 0, 0.12); 
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px); 
+  
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-top: 1px solid rgba(255, 215, 0, 0.7);
+  border-radius: 50px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 215, 0, 0.15); 
+  transition: all 0.2s ease;
+}
+
+.gold-btn:active {
+  transform: translate(-50%, 2px) scale(0.98);
+  background: rgba(255, 215, 0, 0.18);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 215, 0, 0.25);
+}
+
+.btn-main-text {
+  font-family: 'Oswald', sans-serif;
+  color: #ffffff; /* Stark white font */
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================
+   4. DONATION MODAL (CLEAN GLASS BOX)
+   ========================================= */
+.donation-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 86%;
+  max-width: 340px;
+  
+  /* True transparent professional look (No dark background colors) */
+  background: rgba(255, 255, 255, 0.08); 
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+  z-index: 15;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+.donation-title {
+  /* White Caacupé One */
+  font-family: 'Caacupe One', sans-serif;
+  color: #ffffff;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  font-weight: normal; 
+}
+
+/* =========================================
+   5. QR & UPI COPY SECTION
+   ========================================= */
+.qr-container {
+  background: #ffffff; 
+  padding: 8px; 
+  border-radius: 12px; 
+  margin: 0 auto 10px auto; 
+  border: 1px solid rgba(255, 255, 255, 0.5); 
+  width: fit-content;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.qr-image {
+  width: 135px; 
+  height: 135px; 
+  display: block;
+}
+
+.qr-download-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  margin-bottom: 14px;
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upi-copy-wrapper {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px; 
+  margin-bottom: 14px;
+}
+
+.upi-id-display {
+  background: rgba(0,0,0,0.4); 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  padding: 6px 10px; 
+  border-radius: 8px; 
+  color: #ffffff; 
+  font-size: 0.85rem; 
+  letter-spacing: 0.5px;
+}
+
+.upi-copy-btn {
+  background: #ffffff; 
+  border: none; 
+  border-radius: 8px; 
+  padding: 7px 12px; 
+  color: #000; 
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600; 
+  cursor: pointer; 
+  font-size: 0.8rem;
+}
+
+/* =========================================
+   6. INSTRUCTIONS / STEPS
+   ========================================= */
+.payment-steps {
+  /* Archivo Black with Stark White Text */
+  font-family: 'Archivo Black', sans-serif;
+  color: #ffffff;
+  font-size: 0.65rem; /* Archivo Black is naturally thick */
+  text-align: left;
+  margin: 0 auto 14px auto;
+  width: fit-content;
+  line-height: 1.5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-weight: normal; 
+}
+
+/* =========================================
+   7. PAYMENT APP LAUNCHERS & ACTIONS
+   ========================================= */
+.apps-flex {
+  display: flex; 
+  gap: 10px; 
+  justify-content: center; 
+  margin-bottom: 16px;
+}
+
+.white-glass-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.white-glass-btn:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.app-logo-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+  color: #000000;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+/* =========================================
+   8. SUCCESS SCREEN & ANIMATIONS
+   ========================================= */
+.success-msg {
+  color: rgba(255,255,255,0.9);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.success-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
 
 @keyframes float {

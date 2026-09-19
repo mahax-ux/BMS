@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import bgVideo from './assets/Vid.mp4';
-import centerImg from './assets/image.png'; /*[cite: 1]*/
-import borderOverlay from './assets/border_image.png'; /**/
+import centerImg from './assets/image.png'; 
+import borderOverlay from './assets/border_image.png'; 
 
 import gpayLogo from './assets/gpay.png';
 import phonepeLogo from './assets/phonepay.png';
@@ -18,7 +18,6 @@ const PAYEE_NAME = 'Camp Cha Samrat';
 
 function App() {
   const [step, setStep] = useState('HOME'); 
-  const [actionTaken, setActionTaken] = useState(false);
 
   const logTransaction = async (method) => {
     try {
@@ -38,7 +37,6 @@ function App() {
   const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
 
   const handleDownloadQR = async () => {
-    setActionTaken(true);
     try {
       const response = await fetch(qrImageUrl);
       const blob = await response.blob();
@@ -56,7 +54,6 @@ function App() {
   };
 
   const handleCopyUPI = async () => {
-    setActionTaken(true);
     try {
       await navigator.clipboard.writeText(UPI_ID);
       alert('✅ UPI ID Copied! Paste it in your payment app.');
@@ -72,7 +69,6 @@ function App() {
 
   const resetApp = () => {
     setStep('HOME');
-    setActionTaken(false);
   };
 
   return (
@@ -84,7 +80,7 @@ function App() {
       <div className="content">
         {step === 'HOME' && (
           <>
-            <img src={centerImg} alt="Center Graphic" className="floating-image" /> {/*[cite: 1]*/}
+            <img src={centerImg} alt="Center Graphic" className="floating-image" /> 
             <button className="gold-btn" onClick={() => setStep('PAY_MANUAL')}>
               <span className="btn-main-text">Contribute Now</span>
             </button>
@@ -98,42 +94,29 @@ function App() {
             <h2 className="donation-title">Contribute</h2>
             
             {/* QR Code Section */}
-            <div style={{
-              background: '#fff', padding: '8px', borderRadius: '12px', 
-              margin: '0 auto 8px auto', border: '2px solid #d4af37', width: 'fit-content'
-            }}>
-              <img src={qrImageUrl} alt="UPI QR Code" style={{ width: '135px', height: '135px', display: 'block' }} />
+            <div className="qr-container">
+              <img src={qrImageUrl} alt="UPI QR Code" className="qr-image" />
             </div>
             
-            <button onClick={handleDownloadQR} className="pay-app-btn" style={{background: 'rgba(218, 165, 32, 0.15)', padding: '6px 14px', fontSize: '0.8rem', marginBottom: '12px'}}>
+            <button onClick={handleDownloadQR} className="qr-download-btn">
               ⬇ Download QR Code
             </button>
 
             {/* UPI Copy Section */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '12px' }}>
-              <div style={{
-                background: 'rgba(0,0,0,0.6)', border: '1px solid #d4af37', 
-                padding: '6px 10px', borderRadius: '8px', color: '#fff', fontSize: '0.8rem', letterSpacing: '0.5px'
-              }}>
-                {UPI_ID}
-              </div>
-              <button onClick={handleCopyUPI} style={{
-                background: '#d4af37', border: 'none', borderRadius: '8px', 
-                padding: '7px 12px', color: '#000', fontWeight: 'bold', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.8rem'
-              }}>
-                Copy
-              </button>
+            <div className="upi-copy-wrapper">
+              <div className="upi-id-display">{UPI_ID}</div>
+              <button onClick={handleCopyUPI} className="upi-copy-btn">Copy</button>
             </div>
 
-            {/* Instructions */}
-            <p className="success-msg" style={{ fontSize: '0.7rem', color: '#ffd700', textAlign: 'left', margin: '0 auto 12px auto', width: 'fit-content', lineHeight: '1.3' }}>
-              <b>1.</b> Download QR or Copy UPI ID.<br/>
-              <b>2.</b> Open your app using buttons below.<br/>
-              <b>3.</b> Scan from Gallery or Paste ID.
+            {/* Instructions / Steps */}
+            <p className="payment-steps">
+              1. Download QR or Copy UPI ID.<br/>
+              2. Open your app using buttons below.<br/>
+              3. Scan from Gallery or Paste ID.
             </p>
 
-            {/* White-Transparent App Launchers with PNG Logos */}
-            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '16px' }}>
+            {/* App Launchers */}
+            <div className="apps-flex">
               <button className="white-glass-btn" onClick={() => handleAppLaunch('gpay', 'tez://')}>
                 <img src={gpayLogo} alt="GPay" className="app-logo-icon" /> GPay
               </button>
@@ -142,7 +125,7 @@ function App() {
               </button>
             </div>
 
-            <button className="action-btn" onClick={() => setStep('SUCCESS')} style={{ padding: '10px' }}>
+            <button className="action-btn" onClick={() => setStep('SUCCESS')}>
               I Have Paid
             </button>
           </div>
@@ -152,18 +135,18 @@ function App() {
           <div className="donation-card success-card">
             <button className="close-btn" onClick={resetApp}>✕</button>
             <div className="success-icon">🙏</div>
-            <h2 className="donation-title" style={{color: '#ffd700'}}>Thank You!</h2>
+            <h2 className="donation-title">Thank You!</h2>
             <p className="success-msg">
               Please show your <b>payment history</b> to the mandal karyakarta and collect your Paavthi.
             </p>
-            <button className="action-btn generate-btn" onClick={resetApp}>
+            <button className="action-btn" onClick={resetApp}>
               Done
             </button>
           </div>
         )}
       </div>
 
-      <img src={borderOverlay} alt="Golden Border Overlay" className="border-overlay" /> {/**/}
+      <img src={borderOverlay} alt="Golden Border Overlay" className="border-overlay" /> 
     </div>
   );
 }
