@@ -18,6 +18,7 @@ const PAYEE_NAME = 'Camp Cha Samrat';
 
 function App() {
   const [step, setStep] = useState('HOME'); 
+  const [isQrMaximized, setIsQrMaximized] = useState(false);
 
   const logTransaction = async (method) => {
     try {
@@ -34,7 +35,7 @@ function App() {
   };
 
   const upiString = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&cu=INR`;
-  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
+  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(upiString)}`;
 
   const handleDownloadQR = async () => {
     try {
@@ -69,6 +70,7 @@ function App() {
 
   const resetApp = () => {
     setStep('HOME');
+    setIsQrMaximized(false);
   };
 
   return (
@@ -92,8 +94,8 @@ function App() {
             <button className="close-btn" onClick={resetApp}>✕</button>
             
             <h2 className="donation-title">
-              {/* Premium Gold Spark Vector */}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector">
+              {/* Left Vector */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector">
                 <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#title-grad)"/>
                 <defs>
                   <linearGradient id="title-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
@@ -103,10 +105,17 @@ function App() {
                   </linearGradient>
                 </defs>
               </svg>
-              Contribute
+              
+              CONTRIBUTE
+              
+              {/* Right Vector (Mirrored) */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="title-vector" style={{ transform: 'scaleX(-1)' }}>
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#title-grad)"/>
+              </svg>
             </h2>
             
-            <div className="qr-container">
+            {/* Clickable QR Code to Enlarge */}
+            <div className="qr-container" onClick={() => setIsQrMaximized(true)} title="Tap to Enlarge">
               <img src={qrImageUrl} alt="UPI QR Code" className="qr-image" />
             </div>
             
@@ -151,6 +160,17 @@ function App() {
             <button className="action-btn" onClick={resetApp}>
               Done
             </button>
+          </div>
+        )}
+
+        {/* Maximized QR Overlay */}
+        {isQrMaximized && (
+          <div className="qr-modal-overlay" onClick={() => setIsQrMaximized(false)}>
+            <div className="qr-modal-content" onClick={(e) => e.stopPropagation()}>
+              <button className="qr-close-btn" onClick={() => setIsQrMaximized(false)}>✕</button>
+              <img src={qrImageUrl} alt="Enlarged UPI QR Code" className="qr-image-maximized" />
+              <p className="qr-modal-text">Scan & Pay</p>
+            </div>
           </div>
         )}
       </div>
