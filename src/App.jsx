@@ -115,9 +115,12 @@ function App() {
             
             <section className="hero-section">
               <div className="top-header">
-                <span className="creator-tag">website by Mahant - 7483430871</span>
+                <div className="creator-tag">
+                  <span className="creator-line-1">website by :</span>
+                  <span className="creator-line-2">Mahant - 7483430871</span>
+                </div>
                 <span className="shloka-tag">
-                  वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br/>
+                  वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ。<br/>
                   निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
                 </span>
               </div>
